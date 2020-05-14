@@ -10,7 +10,8 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },  {
+  },
+  {
     path: 'history-main',
     loadChildren: () => import('./history-main/history-main.module').then( m => m.HistoryMainPageModule)
   },
@@ -21,6 +22,13 @@ const routes: Routes = [
   {
     path: 'order-cancel',
     loadChildren: () => import('./order-cancel/order-cancel.module').then( m => m.OrderCancelPageModule)
+  },{
+    path: 'contract-main',
+    loadChildren: () => import('./contract-main/contract-main.module').then( m => m.ContractMainPageModule)
+  },
+  {
+    path: 'contract-detail',
+    loadChildren: () => import('./contract-detail/contract-detail.module').then( m => m.ContractDetailPageModule)
   },
 
 ];
