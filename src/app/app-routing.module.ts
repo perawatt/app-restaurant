@@ -10,7 +10,11 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },  {
+    path: 'history-main',
+    loadChildren: () => import('./history-main/history-main.module').then( m => m.HistoryMainPageModule)
   },
+
 ];
 
 @NgModule({
