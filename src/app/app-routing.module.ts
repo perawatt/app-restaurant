@@ -14,6 +14,14 @@ const routes: Routes = [
     path: 'history-main',
     loadChildren: () => import('./history-main/history-main.module').then( m => m.HistoryMainPageModule)
   },
+  {
+    path: 'order-main',
+    loadChildren: () => import('./order-main/order-main.module').then( m => m.OrderMainPageModule)
+  },
+  {
+    path: 'order-cancel',
+    loadChildren: () => import('./order-cancel/order-cancel.module').then( m => m.OrderCancelPageModule)
+  },
 
 ];
 
