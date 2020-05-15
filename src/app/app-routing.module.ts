@@ -31,6 +31,25 @@ const routes: Routes = [
     loadChildren: () => import('./contract-detail/contract-detail.module').then( m => m.ContractDetailPageModule)
   },
   {
+    path: 'setting-main',
+    loadChildren: () => import('./setting-main/setting-main.module').then( m => m.SettingMainPageModule)
+  },
+  {
+    path: 'setting-office-hour',
+    loadChildren: () => import('./setting-office-hour/setting-office-hour.module').then( m => m.SettingOfficeHourPageModule)
+  },
+  {
+    path: 'order-cancel',
+    loadChildren: () => import('./order-cancel/order-cancel.module').then( m => m.OrderCancelPageModule)
+  },{
+    path: 'contract-main',
+    loadChildren: () => import('./contract-main/contract-main.module').then( m => m.ContractMainPageModule)
+  },
+  {
+    path: 'contract-detail',
+    loadChildren: () => import('./contract-detail/contract-detail.module').then( m => m.ContractDetailPageModule)
+  },
+  {
     path: 'menu-main',
     loadChildren: () => import('./menu-main/menu-main.module').then( m => m.MenuMainPageModule)
   },
