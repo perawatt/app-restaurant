@@ -29,7 +29,15 @@ const routes: Routes = [
   {
     path: 'contract-detail',
     loadChildren: () => import('./contract-detail/contract-detail.module').then( m => m.ContractDetailPageModule)
+  },  {
+    path: 'setting-main',
+    loadChildren: () => import('./setting-main/setting-main.module').then( m => m.SettingMainPageModule)
   },
+  {
+    path: 'setting-office-hour',
+    loadChildren: () => import('./setting-office-hour/setting-office-hour.module').then( m => m.SettingOfficeHourPageModule)
+  },
+
 
 ];
 
