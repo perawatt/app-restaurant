@@ -30,6 +30,26 @@ const routes: Routes = [
     path: 'contract-detail',
     loadChildren: () => import('./contract-detail/contract-detail.module').then( m => m.ContractDetailPageModule)
   },
+  {
+    path: 'menu-main',
+    loadChildren: () => import('./menu-main/menu-main.module').then( m => m.MenuMainPageModule)
+  },
+  {
+    path: 'menu-create',
+    loadChildren: () => import('./menu-create/menu-create.module').then( m => m.MenuCreatePageModule)
+  },
+  {
+    path: 'menu-create-qr-confirm',
+    loadChildren: () => import('./menu-create-qr-confirm/menu-create-qr-confirm.module').then( m => m.MenuCreateQrConfirmPageModule)
+  },
+  {
+    path: 'menu-category-edit',
+    loadChildren: () => import('./menu-category-edit/menu-category-edit.module').then( m => m.MenuCategoryEditPageModule)
+  },
+  {
+    path: 'menu-category-create',
+    loadChildren: () => import('./menu-category-create/menu-category-create.module').then( m => m.MenuCategoryCreatePageModule)
+  },
 
 ];
 
