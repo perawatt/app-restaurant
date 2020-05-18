@@ -5,16 +5,25 @@
 </ion-header>
 
 <ion-content color="light">
+  <ion-item lines="none" color="light" class="ion-margin-top">
+    <ion-button (click)="presentActionSheet()" color="warning" shape="round" size="default" class="center">
+      <ion-label color="light">
+        <h2>
+          ปรับแต่งเมนูร้านของคุณ
+        </h2>
+      </ion-label>
+    </ion-button>
+  </ion-item>
   <ion-list lines="full">
     <ion-item color="light">
-      <ion-segment  mode="md" color="warning">
-        <ion-segment-button >
+      <ion-segment mode="md" color="warning">
+        <ion-segment-button>
           <ion-label><b> เครื่องดื่มเย็น</b></ion-label>
         </ion-segment-button>
-        <ion-segment-button >
-          <ion-label><b>เครื่องดื่มเย็น</b></ion-label>
+        <ion-segment-button>
+          <ion-label><b>เครื่องดื่มร้อน</b></ion-label>
         </ion-segment-button>
-        <ion-segment-button >
+        <ion-segment-button>
           <ion-label><b>เครื่องดื่มปั่น</b></ion-label>
         </ion-segment-button>
       </ion-segment>
@@ -41,9 +50,7 @@
       </ion-text>
       <ion-note slot="end">
         <ion-label color="dark">
-          <h2>
-            <ion-icon name="pencil-outline"></ion-icon>
-          </h2>
+          <ion-icon name="pencil-outline"></ion-icon>
         </ion-label>
       </ion-note>
     </ion-item>
