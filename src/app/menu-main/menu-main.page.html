@@ -6,10 +6,10 @@
 
 <ion-content color="light">
   <ion-item lines="none" color="light" class="ion-margin-top">
-    <ion-button color="warning" shape="round" size="default" class="center">
+    <ion-button (click)="presentActionSheet()" color="warning" shape="round" size="default" class="center">
       <ion-label color="light">
         <h2>
-            ปรับแต่งเมนูร้านของคุณ
+          ปรับแต่งเมนูร้านของคุณ
         </h2>
       </ion-label>
     </ion-button>
@@ -21,7 +21,7 @@
           <ion-label><b> เครื่องดื่มเย็น</b></ion-label>
         </ion-segment-button>
         <ion-segment-button>
-          <ion-label><b>เครื่องดื่มเย็น</b></ion-label>
+          <ion-label><b>เครื่องดื่มร้อน</b></ion-label>
         </ion-segment-button>
         <ion-segment-button>
           <ion-label><b>เครื่องดื่มปั่น</b></ion-label>
