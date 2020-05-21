@@ -29,7 +29,8 @@ export class RestaurantService implements IRestaurantService {
 
   async getOrderHistories(date: Date): Promise<any> {
     var restaurantId = await this.svc.GetRestaurantId();
-    let apiUrl = this.baseUrl + "GetUnfinishedOrderByOrderId/" + restaurantId + "?" + date;
+    let apiUrl = this.baseUrl + "GetFinishOrder/" + restaurantId; 
+    if(date) apiUrl += "?date=" + date.toISOString();
     return this.http.get(apiUrl).toPromise();
   }
 

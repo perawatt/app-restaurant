@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NativeService } from '../../providers/navigateService';
+import { RestaurantService } from '../../services/restaurant.service';
 
 @Component({
   selector: 'app-history-main',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryMainPage implements OnInit {
 
-  constructor() { }
+  date: Date =  new Date();
+  data$ = Promise.resolve([]);
+  constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
   ngOnInit() {
   }
 
+  ionViewDidEnter(){
+    this.nativeSvc.SetPageTitle("ออเดอร์ย้อนหลัง");
+    this.data$ = this.restaurantSvc.getOrderHistories(this.date);
+    console.log(this.date);
+    
+  }
 }

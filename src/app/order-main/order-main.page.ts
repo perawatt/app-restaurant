@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NativeService } from '../../providers/navigateService';
+import { RestaurantService } from '../../services/restaurant.service';
 
 @Component({
   selector: 'app-order-main',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderMainPage implements OnInit {
 
-  constructor() { }
+  data$ = Promise.resolve([]);
+  constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter(){
+    this.nativeSvc.SetPageTitle("ออเดอร์วันนี้");
+    this.data$ = this.restaurantSvc.getOrderList();
+  }
+
+  cancelOrder(_orderId: string){
+    this.nativeSvc.NavigateToPage("order-cancel", { orderId: _orderId });
   }
 
 }

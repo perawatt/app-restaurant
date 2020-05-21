@@ -1,86 +1,56 @@
-<ion-header>
-  <ion-toolbar color="warning">
-    <ion-title color="light">ออร์เดอร์วันนี้</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content mode="ios">
-  <ion-card color="light">
-    <ion-list lines="inset">
-      <ion-item lines="none" color="light">
-        <ion-label>
-          <h1><b>คำสั่งซื้อ 5632</b><small>(Delivery Company AA)</small></h1>
-        </ion-label>
-      </ion-item>
-      <ion-item color="light" lines="full">
-        <ion-label color="secondary">
-          <p>00.20 นาที</p>
-        </ion-label>
-        <ion-note slot="end" class="ion-text-end">
-          <ion-text color="dark"><b>ราคารวม ฿270</b></ion-text>
-        </ion-note>
-      </ion-item>
-      <ion-item color="light">
-        <ion-label>
-          <h2><b>เอสเปรสโซเย็น</b></h2>
-          <ion-text color="danger">
-            <p>&nbsp;</p>
-          </ion-text>
-        </ion-label>
-        <ion-note slot="end" class="ion-text-end">
-          <ion-label color="dark">
-            <h2><b>฿50</b></h2>
-            <ion-text color="dark">
-              <p>&nbsp;</p>
+  <ng-container *ngIf="data$ | async as data">
+    <ion-card color="light" *ngFor="let order of data">
+      <ion-list lines="inset">
+        <ion-item lines="none" color="light">
+          <ion-label class="ion-text-wrap">
+            <h1><b>คำสั่งซื้อ {{order._id}}</b><small> ({{order.delivery?.name}})</small></h1>
+          </ion-label>
+        </ion-item>
+        <ion-item color="light" lines="full">
+          <ion-label color="secondary">
+            <p>00.20 นาที</p>
+          </ion-label>
+          <ion-note slot="end" class="ion-text-end">
+            <ion-text color="dark"><b>ราคารวม ฿270</b></ion-text>
+          </ion-note>
+        </ion-item>
+        <!-- TODO รอ Product -->
+        <ion-item color="light" *ngFor="let product of order.orderList">
+          <ion-label>
+            <h2><b>นมเย็น</b></h2>
+            <ion-text color="danger">
+              <p>หวานปกติ</p>
             </ion-text>
           </ion-label>
-        </ion-note>
-      </ion-item>
-      <ion-item color="light">
-        <ion-label>
-          <h2><b>นมเย็น</b></h2>
-          <ion-text color="danger">
-            <p>หวานปกติ</p>
-          </ion-text>
-        </ion-label>
-        <ion-note slot="end" class="ion-text-end">
-          <ion-label color="dark">
-            <h2><b>฿35</b></h2>
-            <ion-text color="dark">
-              <p><b>&nbsp;</b></p>
-            </ion-text>
+          <ion-note slot="end" class="ion-text-end">
+            <ion-label color="dark">
+              <h2><b>฿35</b></h2>
+              <ion-text color="dark">
+                <p><b>&nbsp;</b></p>
+              </ion-text>
+            </ion-label>
+          </ion-note>
+        </ion-item>
+        <ion-item lines="none" color="light">
+          <ion-label color="success">
+            <ion-icon name="call"></ion-icon> ผู้ส่ง
           </ion-label>
-        </ion-note>
-      </ion-item>
-      <ion-item color="light">
-        <ion-label>
-          <h2><b>โอวัลตินร้อน</b></h2>
-          <ion-text color="danger">
-            <p>ไม่หวาน</p>
-          </ion-text>
-        </ion-label>
-        <ion-note slot="end" class="ion-text-end">
-          <ion-label color="dark">
-            <h2><b>฿40</b></h2>
-            <ion-text color="dark">
-              <p>&nbsp;</p>
+          <ion-note *ngIf="!order.cancelRequestId" slot="end" class="ion-text-end">
+            <ion-text color="dark" class="ion-margin-end">
+              <b>เสร็จแล้ว</b>
             </ion-text>
-          </ion-label>
-        </ion-note>
-      </ion-item>
-      <ion-item lines="none" color="light">
-        <ion-label color="success">
-          <ion-icon name="call"></ion-icon> ผู้ส่ง
-        </ion-label>
-        <ion-note slot="end" class="ion-text-end">
-          <ion-text color="dark" class="ion-margin-end">
-            <b>เสร็จแล้ว</b>
-          </ion-text>
-          <ion-text color="dark">
-            <b>ยกเลิก</b>
-          </ion-text>
-        </ion-note>
-      </ion-item>
-    </ion-list>
-  </ion-card>
+            <ion-text color="dark" (click)="cancelOrder(order._id)">
+              <b>ยกเลิก</b>
+            </ion-text>
+          </ion-note>
+          <ion-note *ngIf="order.cancelRequestId" slot="end" class="ion-text-end">
+            <ion-text color="danger">
+              <b>รออนุมัติการยกเลิก !</b>
+            </ion-text>
+          </ion-note>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </ng-container>
 </ion-content>
