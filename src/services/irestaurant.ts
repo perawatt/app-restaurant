@@ -6,7 +6,7 @@ export interface IRestaurantService {
 
     getOrderInfo(orderId: string): Promise<any>;
 
-    getOrderHistories(): Promise<any>;
+    getOrderHistories(date: Date): Promise<any>;
   
     createOrderCancelRequest(orderId: string, data: any): Promise<any>;
 }
