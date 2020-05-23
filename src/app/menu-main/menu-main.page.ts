@@ -30,7 +30,12 @@ export class MenuMainPage implements OnInit {
     const actionSheet = await this.actionSheetController.create({
       header: 'ปรับแต่งเมนูร้านของคุณ',
       buttons: [
-        { text: 'เพิ่มเมนู' },
+        {
+          text: 'เพิ่มเมนู', 
+          handler: () => {
+            this.nativeSvc.NavigateToPage("menu-category-create");
+          }
+        },
         { text: 'แก้ไขหมวดหมู่' },
         { text: 'สแกนเพิ่มเมนู' }
       ]

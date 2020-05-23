@@ -1,18 +1,14 @@
-<ion-header>
-  <ion-toolbar color="warning">
-    <ion-title color="light">เพิ่มหมวดหมู่</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content color="light">
-  <ion-list color="light" lines="inset">
+  <ion-list class="ion-no-padding" color="light" lines="inset">
     <ion-list-header color="light" mode="md">
       <ion-label class="ion-margin-top">
         <h1><b>ตั้งชื่อหมวดหมู่</b></h1>
       </ion-label>
     </ion-list-header>
     <ion-item color="light">
-      <ion-input placeholder="เครื่องดื่ม"></ion-input>
+      <form [formGroup]="fg" (ngSubmit)="onSave()">
+        <ion-input formControlName="name" placeholder="เครื่องดื่ม"></ion-input>
+      </form>
     </ion-item>
     <ion-list-header color="light" mode="md">
       <ion-label class="ion-margin-top">
@@ -20,58 +16,39 @@
       </ion-label>
     </ion-list-header>
     <ion-item color="light">
-      <ion-input placeholder="กรุณาระบุ"></ion-input>
+      <ion-input type="text" [(ngModel)]="name" placeholder="กรุณาระบุ"></ion-input>
       <ion-label>บวกราคา</ion-label>
-      <ion-input placeholder="0"></ion-input>
-      <ion-button shape="round" color="success" size="small">
+      <ion-input type="number" (ionFocus)="price = null" [(ngModel)]="price" placeholder="0"></ion-input>
+      <ion-button shape="round" (click)="addOptions(name,price)" color="success" size="small">
         <ion-label color="light">+ เพิ่ม</ion-label>
       </ion-button>
     </ion-item>
-    <ion-item color="light" lines="full">
-      <ion-grid>
-        <ion-row class="ion-justify-content-between">
-          <ion-col>
-            <ion-label>ข้าวโพด</ion-label>
-          </ion-col>
-          <ion-col>
-            <ion-label>+10 บาท</ion-label>
-          </ion-col>
-          <ion-col>
-            <ion-label color="danger">ลบ</ion-label>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-between">
-          <ion-col>
-            <ion-label>ข้าวโพด</ion-label>
-          </ion-col>
-          <ion-col>
-            <ion-label>+10 บาท</ion-label>
-          </ion-col>
-          <ion-col>
-            <ion-label color="danger">ลบ</ion-label>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-between">
-          <ion-col>
-            <ion-label>ข้าวโพด</ion-label>
-          </ion-col>
-          <ion-col>
-            <ion-label>+10 บาท</ion-label>
-          </ion-col>
-          <ion-col>
-            <ion-label color="danger">ลบ</ion-label>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
+
+    <ng-container *ngIf="lstOptions.length > 0 ">
+      <ion-item color="light" lines="full">
+        <ion-grid>
+          <ion-row *ngFor="let data of lstOptions" class="ion-justify-content-between">
+            <ion-col>
+              <ion-label>{{data.name}}</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>+{{data.price}} บาท</ion-label>
+            </ion-col>
+            <ion-col (click)="deleteOptions(data)">
+              <ion-label color="danger">ลบ</ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ng-container>
     <ion-item color="light" lines="none">
       <ion-label><b>เพิ่มหมายเหตุได้</b></ion-label>
-      <ion-checkbox slot="start" color="danger"></ion-checkbox>
+      <ion-checkbox [(ngModel)]="canNote" slot="start" color="danger"></ion-checkbox>
     </ion-item>
   </ion-list>
 </ion-content>
 <ion-footer>
-  <ion-button class="ion-no-margin" expand="full" color="warning">
+  <ion-button (click)="onSave()" class="ion-no-margin" expand="full" color="warning">
     <ion-label color="light"> <b>ตกลง</b></ion-label>
   </ion-button>
 </ion-footer>

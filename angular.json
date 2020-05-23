@@ -39,7 +39,7 @@
                 "input": "src/global.scss"
               }
             ],
-            "scripts": []
+            "scripts": ["src/assets/azure-storage/azure-storage.blob.js"]
           },
           "configurations": {
             "production": {
