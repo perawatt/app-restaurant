@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,8 +13,9 @@ import { MenuCreatePage } from './menu-create.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule,
     MenuCreatePageRoutingModule
   ],
   declarations: [MenuCreatePage]
 })
-export class MenuCreatePageModule {}
+export class MenuCreatePageModule { }

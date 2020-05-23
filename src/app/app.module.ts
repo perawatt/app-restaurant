@@ -10,6 +10,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NativeService } from '../providers/navigateService';
+import { BlobStorageService } from 'src/services/blob-storage/blob-storage.service';
+import { BLOB_STORAGE_TOKEN, IAzureStorage } from 'src/services/blob-storage/azureStorage';
+declare var AzureStorage: IAzureStorage;
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +23,12 @@ import { NativeService } from '../providers/navigateService';
     StatusBar,
     SplashScreen,
     NativeService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    BlobStorageService,
+    {
+      provide: BLOB_STORAGE_TOKEN,
+      useValue: AzureStorage.Blob
+    }
   ],
   bootstrap: [AppComponent]
 })

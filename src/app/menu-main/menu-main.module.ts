@@ -13,8 +13,8 @@ import { MenuMainPage } from './menu-main.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    MenuMainPageRoutingModule
+    MenuMainPageRoutingModule,
   ],
   declarations: [MenuMainPage]
 })
-export class MenuMainPageModule {}
+export class MenuMainPageModule { }
