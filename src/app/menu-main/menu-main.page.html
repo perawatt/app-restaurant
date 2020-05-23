@@ -14,89 +14,94 @@
       </ion-label>
     </ion-button>
   </ion-item>
-  <ion-list lines="full">
-    <ion-item color="light">
-      <ion-segment mode="md" color="warning">
-        <ion-segment-button>
-          <ion-label><b> เครื่องดื่มเย็น</b></ion-label>
-        </ion-segment-button>
-        <ion-segment-button>
-          <ion-label><b>เครื่องดื่มร้อน</b></ion-label>
-        </ion-segment-button>
-        <ion-segment-button>
-          <ion-label><b>เครื่องดื่มปั่น</b></ion-label>
-        </ion-segment-button>
-      </ion-segment>
-    </ion-item>
-  </ion-list>
-  <ion-list color="light">
-    <ion-list-header color="light" mode="md">
-      <ion-label class="ion-margin-top">
-        <h1><b>เครื่องดื่มเย็น(3)</b></h1>
-      </ion-label>
-    </ion-list-header>
-    <ion-item color="light">
-      <ion-thumbnail slot="start" class="ion-margin-vertical">
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-      </ion-thumbnail>
-      <ion-text>
-        <ion-label color="dark">
-          <h2><b>เอสเปรสโซเย็น</b></h2>
-          <h3><b>฿50</b></h3>
-        </ion-label>
-        <ion-label color="danger">
-          <p></p>
-        </ion-label>
-      </ion-text>
-      <ion-note slot="end">
-        <ion-label color="dark">
-          <h2>
-            <ion-icon name="pencil-outline"></ion-icon>
-          </h2>
-        </ion-label>
-      </ion-note>
-    </ion-item>
-    <ion-item color="light">
-      <ion-thumbnail slot="start" class="ion-margin-vertical">
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-      </ion-thumbnail>
-      <ion-text>
-        <ion-label color="secondary">
-          <h2><b>อเมริกาโน่เย็น</b></h2>
-          <h3><b>฿50</b></h3>
-        </ion-label>
-        <ion-label color="danger">
-          <p>ปิดรับออเดอร์</p>
-        </ion-label>
-      </ion-text>
-      <ion-note slot="end">
-        <ion-label color="dark">
-          <h2>
-            <ion-icon name="pencil-outline"></ion-icon>
-          </h2>
-        </ion-label>
-      </ion-note>
-    </ion-item>
-    <ion-item color="light">
-      <ion-thumbnail slot="start" class="ion-margin-vertical">
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-      </ion-thumbnail>
-      <ion-text>
-        <ion-label color="dark">
-          <h2><b>คาปูชิโน่เย็น</b></h2>
-          <h3><b>฿50</b></h3>
-        </ion-label>
-        <ion-label color="danger">
-          <p></p>
-        </ion-label>
-      </ion-text>
-      <ion-note slot="end">
-        <ion-label color="dark">
-          <h2>
-            <ion-icon name="pencil-outline"></ion-icon>
-          </h2>
-        </ion-label>
-      </ion-note>
-    </ion-item>
-  </ion-list>
+  <ng-container *ngIf="data$ | async as item">
+    <ion-list lines="full" class="ion-no-padding">
+      <ion-item color="light">
+        <ion-segment (ionChange)="segmentChanged($event)" lines="none" mode="md" color="warning">
+          <ion-segment-button *ngFor="let data of item" value="{{data.categoryId}}">
+            <ion-label><b> {{data.categoryName}}</b></ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-item>
+    </ion-list>
+
+    <ng-container *ngFor="let data of item">
+      <ng-container *ngIf="data.categoryId == segmentValue">
+        <ion-list color="light" class="ion-no-padding">
+          <ion-list-header color=" light" mode="md">
+            <ion-label class="ion-margin-top">
+              <h1><b>{{data.categoryName}}(3)</b></h1>
+            </ion-label>
+          </ion-list-header>
+          <ion-item color="light" *ngFor="let menu of data.products">
+            <ion-thumbnail slot="start" class="ion-margin-vertical">
+              <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+            </ion-thumbnail>
+            <ion-text>
+              <ion-label color="dark">
+                <h2><b>เอสเปรสโซเย็น</b></h2>
+                <h3><b>฿50</b></h3>
+              </ion-label>
+              <ion-label color="danger">
+                <p></p>
+              </ion-label>
+            </ion-text>
+            <ion-note slot="end">
+              <ion-label color="dark">
+                <h2>
+                  <ion-icon name="pencil-outline"></ion-icon>
+                </h2>
+              </ion-label>
+            </ion-note>
+          </ion-item>
+          <ion-item color="light">
+            <ion-thumbnail slot="start" class="ion-margin-vertical">
+              <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+            </ion-thumbnail>
+            <ion-text>
+              <ion-label color="secondary">
+                <h2><b>อเมริกาโน่เย็น</b></h2>
+                <h3><b>฿50</b></h3>
+              </ion-label>
+              <ion-label color="danger">
+                <p>ปิดรับออเดอร์</p>
+              </ion-label>
+            </ion-text>
+            <ion-note slot="end">
+              <ion-label color="dark">
+                <h2>
+                  <ion-icon name="pencil-outline"></ion-icon>
+                </h2>
+              </ion-label>
+            </ion-note>
+          </ion-item>
+          <ion-item color="light">
+            <ion-thumbnail slot="start" class="ion-margin-vertical">
+              <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+            </ion-thumbnail>
+            <ion-text>
+              <ion-label color="dark">
+                <h2><b>คาปูชิโน่เย็น</b></h2>
+                <h3><b>฿50</b></h3>
+              </ion-label>
+              <ion-label color="danger">
+                <p></p>
+              </ion-label>
+            </ion-text>
+            <ion-note slot="end">
+              <ion-label color="dark">
+                <h2>
+                  <ion-icon name="pencil-outline"></ion-icon>
+                </h2>
+              </ion-label>
+            </ion-note>
+          </ion-item>
+        </ion-list>
+      </ng-container>
+
+    </ng-container>
+
+
+  </ng-container>
+
 </ion-content>

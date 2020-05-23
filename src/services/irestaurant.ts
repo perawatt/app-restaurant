@@ -1,6 +1,8 @@
 export interface IRestaurantService {
 
     getRestaurantInfo(): Promise<any>;
+    
+    getRestaurantMenu(): Promise<any>;
 
     getOrderList(): Promise<any>;
 

@@ -14,6 +14,13 @@ export class RestaurantService implements IRestaurantService {
     let apiUrl = this.baseUrl + "GetRestaurantInfo/" + restaurantId;
     return this.http.get(apiUrl).toPromise();
   }
+  
+  async getRestaurantMenu(): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "GetRestaurantMenu/" + restaurantId;
+    return this.http.get(apiUrl).toPromise();
+  }
+
 
   async getOrderList(): Promise<any> {
     var restaurantId = await this.svc.GetRestaurantId();

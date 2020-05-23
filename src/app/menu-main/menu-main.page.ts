@@ -1,6 +1,7 @@
+import { RestaurantService } from './../../services/restaurant.service';
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
-
+import { NativeService } from 'src/providers/navigateService';
 @Component({
   selector: 'app-menu-main',
   templateUrl: './menu-main.page.html',
@@ -8,9 +9,21 @@ import { ActionSheetController } from '@ionic/angular';
 })
 export class MenuMainPage implements OnInit {
 
-  constructor(public actionSheetController: ActionSheetController) { }
+  data$ = Promise.resolve([]);
+  segmentValue: any;
+  constructor(public actionSheetController: ActionSheetController, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    this.nativeSvc.SetPageTitle("เมนูของร้านคุณ");
+    this.data$ = this.restaurantSvc.getRestaurantMenu();
+  }
+
+  segmentChanged(ev: any) {
+    console.log('Segment changed', ev.target.value);
+    this.segmentValue = ev.target.value;
   }
 
   async presentActionSheet() {
