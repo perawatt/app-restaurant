@@ -17,4 +17,7 @@ export class MenuCategoryEditPage implements OnInit {
     this.data$ = this.restaurantSvc.getCategoryList();
   }
 
+  createCategoty() {
+    this.nativeSvc.NavigateToPage("menu-create");
+  }
 }
