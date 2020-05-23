@@ -31,12 +31,17 @@ export class MenuMainPage implements OnInit {
       header: 'ปรับแต่งเมนูร้านของคุณ',
       buttons: [
         {
-          text: 'เพิ่มเมนู', 
+          text: 'เพิ่มเมนู',
           handler: () => {
             this.nativeSvc.NavigateToPage("menu-category-create");
           }
         },
-        { text: 'แก้ไขหมวดหมู่' },
+        {
+          text: 'แก้ไขหมวดหมู่',
+          handler: () => {
+            this.nativeSvc.NavigateToPage("menu-category-edit");
+          }
+        },
         { text: 'สแกนเพิ่มเมนู' }
       ]
     });

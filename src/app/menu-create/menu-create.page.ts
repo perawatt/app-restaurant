@@ -56,6 +56,7 @@ export class MenuCreatePage implements OnInit {
             combineAll(),
           );
         })
+        this.nativeSvc.NavigateToPage("menu-main");
       });
     }
   }
