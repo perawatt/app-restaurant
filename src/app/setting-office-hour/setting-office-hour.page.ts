@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NativeService } from 'src/providers/NativeService';
 
 @Component({
   selector: 'app-setting-office-hour',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingOfficeHourPage implements OnInit {
 
-  constructor() { }
+  constructor(private nativeSvc: NativeService) { }
 
   ngOnInit() {
+    this.nativeSvc.SetPageTitle("ตั้งเวลาเปิด-ปิดร้าน");
   }
 
 }
