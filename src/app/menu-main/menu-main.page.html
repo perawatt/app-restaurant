@@ -24,7 +24,7 @@
         <ion-list color="light" class="ion-no-padding">
           <ion-list-header color=" light" mode="md">
             <ion-label class="ion-margin-top">
-              <h1><b>{{data.categoryName}}({{item.length}})</b></h1>
+              <h1><b>{{data.categoryName}}({{data.products?.length}})</b></h1>
             </ion-label>
           </ion-list-header>
           <ion-item color="light" *ngFor="let menu of data.products">
