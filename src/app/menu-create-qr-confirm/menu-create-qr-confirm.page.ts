@@ -1,3 +1,4 @@
+import { NativeService } from 'src/providers/navigateService';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuCreateQrConfirmPage implements OnInit {
 
-  constructor() { }
+  constructor(private nativeSvc: NativeService) { }
 
   ngOnInit() {
-  }
+    this.nativeSvc.SetPageTitle("ยืนยันการเพิ่มเมนู");
+
+}
 
 }
