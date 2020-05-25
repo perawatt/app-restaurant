@@ -1,7 +1,7 @@
 import { RestaurantService } from './../../services/restaurant.service';
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
-import { NativeService } from 'src/providers/navigateService';
+import { NativeService } from 'src/providers/NativeService';
 @Component({
   selector: 'app-menu-main',
   templateUrl: './menu-main.page.html',

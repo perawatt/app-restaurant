@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { NativeService } from '../providers/navigateService';
+import { NativeService } from '../providers/NativeService';
 import { BlobStorageService } from 'src/services/blob-storage/blob-storage.service';
 import { BLOB_STORAGE_TOKEN, IAzureStorage } from 'src/services/blob-storage/azureStorage';
 declare var AzureStorage: IAzureStorage;

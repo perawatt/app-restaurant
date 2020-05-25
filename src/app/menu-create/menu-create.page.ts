@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NativeService } from 'src/providers/navigateService';
+import { NativeService } from 'src/providers/NativeService';
 import { RestaurantService } from 'src/services/restaurant.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { combineAll, map } from 'rxjs/operators';

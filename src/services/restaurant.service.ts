@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IRestaurantService } from './irestaurant';
 import { API_URL } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { NativeService } from '../providers/navigateService';
+import { NativeService } from '../providers/NativeService';
 
 @Injectable({
   providedIn: 'root'
