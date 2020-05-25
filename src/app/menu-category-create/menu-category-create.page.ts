@@ -27,14 +27,15 @@ export class MenuCategoryCreatePage implements OnInit {
   }
 
   addOptions() {
-    this.lstOptions.push({
-      'name': this.name,
-      'price': this.price,
-    });
+    if (this.name) {
+      this.lstOptions.push({
+        'name': this.name,
+        'price': this.price,
+      });
+    }
   }
 
   deleteOptions(data: any) {
-    console.log("dasd");
     let index = this.lstOptions.findIndex(it => it == data);
     if (index != -1) this.lstOptions.splice(index, 1);
   }
@@ -44,7 +45,7 @@ export class MenuCategoryCreatePage implements OnInit {
     this.fg.get('canNote').patchValue(this.canNote);
     if (this.fg.valid) {
       this.restaurantSvc.createCategory(this.fg.value);
-        this.nativeSvc.NavigateToPage("menu-category-edit");
+      this.nativeSvc.NavigateToPage("menu-category-edit");
     }
   }
 }
