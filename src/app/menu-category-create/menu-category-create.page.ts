@@ -44,8 +44,9 @@ export class MenuCategoryCreatePage implements OnInit {
     this.fg.get('options').patchValue(this.lstOptions);
     this.fg.get('canNote').patchValue(this.canNote);
     if (this.fg.valid) {
-      this.restaurantSvc.createCategory(this.fg.value);
-      this.nativeSvc.NavigateToPage("menu-category-edit");
+      this.restaurantSvc.createCategory(this.fg.value).then(_ => {
+        this.nativeSvc.GoBack();
+      });
     }
   }
 }
