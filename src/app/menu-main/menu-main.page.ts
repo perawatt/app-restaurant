@@ -33,7 +33,7 @@ export class MenuMainPage implements OnInit {
         {
           text: 'เพิ่มเมนู',
           handler: () => {
-            this.nativeSvc.NavigateToPage("menu-category-create");
+            this.nativeSvc.NavigateToPage("menu-create");
           }
         },
         {
