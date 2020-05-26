@@ -9,9 +9,10 @@ import { RestaurantService } from 'src/services/restaurant.service';
   styleUrls: ['./contract-detail.page.scss'],
 })
 export class ContractDetailPage implements OnInit {
-  data$ = Promise.resolve([]);
-  deliveryName: string;
-  deliveryId: string;
+  
+  public data$ = Promise.resolve([]);
+  public deliveryName: string;
+  public deliveryId: string;
   constructor(private route: ActivatedRoute, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) {
     this.route.params.subscribe(param => { this.deliveryId = param["deliveryId"] });
     this.route.params.subscribe(param => { this.deliveryName = param["deliveryName"] });

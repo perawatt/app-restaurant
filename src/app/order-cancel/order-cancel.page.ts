@@ -10,8 +10,8 @@ import { RestaurantService } from '../../services/restaurant.service';
 })
 export class OrderCancelPage implements OnInit {
 
-  orderId: string;
-  data$ = Promise.resolve([]);
+  public orderId: string;
+  public data$ = Promise.resolve([]);
   constructor(private nativeSvc: NativeService, private route: ActivatedRoute, private restaurantSvc: RestaurantService) {
     this.route.params.subscribe(param => { this.orderId = param["orderId"] });
   }

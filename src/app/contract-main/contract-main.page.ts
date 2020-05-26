@@ -8,8 +8,8 @@ import { RestaurantService } from 'src/services/restaurant.service';
   styleUrls: ['./contract-main.page.scss'],
 })
 export class ContractMainPage implements OnInit {
-  data$ = Promise.resolve([]);
-
+  
+  public data$ = Promise.resolve([]);
   constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
   ngOnInit() {

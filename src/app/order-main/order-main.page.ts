@@ -9,7 +9,7 @@ import { RestaurantService } from '../../services/restaurant.service';
 })
 export class OrderMainPage implements OnInit {
 
-  data$ = Promise.resolve([]);
+  public data$ = Promise.resolve([]);
   constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
   ngOnInit() {
