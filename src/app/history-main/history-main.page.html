@@ -4,13 +4,13 @@
       <ion-label>
         <h2>
           <b>
-            รายได้วันนี้ 5/12/2562
+            รายได้วันนี้ {{ date | date:'d/M/yyy' }}
           </b>
         </h2>
       </ion-label>
       <ion-note color="light" slot="end" class="ion-text-end">
         <b>
-          170 บาท
+          {{ totalToday }} บาท
         </b>
       </ion-note>
     </ion-item>
@@ -34,21 +34,21 @@
           <ion-label color="secondary">
             <p>00.20 นาที</p>
           </ion-label>
-          <ion-note  slot="end" class="ion-text-end">
-            <ion-text [color]="order.cancelDate ? 'tertiary' : 'dark'"><b>ราคารวม ฿270</b></ion-text>
+          <ion-note slot="end" class="ion-text-end">
+            <ion-text [color]="order.cancelDate ? 'tertiary' : 'dark'"><b>ราคารวม ฿{{ order.totalPrice }}</b></ion-text>
           </ion-note>
         </ion-item>
-        <!-- TODO รอ Product -->
-        <ion-item color="light" *ngFor="let product of order.orderList">
+        <ion-item color="light" *ngFor="let product of order.productList">
           <ion-label [color]="order.cancelDate ? 'tertiary' : ''">
-            <h2><b>นมเย็น</b></h2>
+            <h2><b> {{ product.name}} </b></h2>
             <ion-text color="danger">
-              <p>หวานปกติ</p>
+              <p *ngIf="product.option"> {{ product.option}} </p>
+              <p *ngIf="!product.option">&nbsp;</p>
             </ion-text>
           </ion-label>
           <ion-note slot="end" class="ion-text-end">
             <ion-label [color]="order.cancelDate ? 'tertiary' : 'dark'">
-              <h2><b>฿35</b></h2>
+              <h2><b>฿{{ product.price }} </b></h2>
               <ion-text [color]="order.cancelDate ? 'tertiary' : 'dark'">
                 <p><b>&nbsp;</b></p>
               </ion-text>

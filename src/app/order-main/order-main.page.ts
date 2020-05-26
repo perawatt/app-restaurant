@@ -18,6 +18,9 @@ export class OrderMainPage implements OnInit {
   ionViewDidEnter(){
     this.nativeSvc.SetPageTitle("ออเดอร์วันนี้");
     this.data$ = this.restaurantSvc.getOrderList();
+    this.data$.then(it=>{
+      console.log(it);
+    })
   }
 
   cancelOrder(_orderId: string){
