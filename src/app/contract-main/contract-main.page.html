@@ -1,37 +1,42 @@
 <ion-content mode="ios" class="ion-padding">
-  <ion-list lines="none">
-    <ion-item color="light" class="ion-padding-bottom">
-      <ion-avatar slot="start">
-        <img src="https://cdn0.iconfinder.com/data/icons/transportation-163/14/Vector-12-512.png">
-      </ion-avatar>
-      <ion-label>
-        <h1><b>Fast delivery</b></h1>
-        <ion-label color="success">
-          <h3>
-            <ion-icon name="checkmark-circle"></ion-icon>
-            <!-- <ion-icon style="vertical-align: text-bottom;" name="checkmark-circle"></ion-icon> -->
-            คุณได้เข้าร่วมแล้ว
-          </h3>
+  <ng-container *ngIf="data$ | async as data">
+    <ion-list lines="none">
+      <ion-item *ngFor=" let delivery of data" color="light" class="ion-padding-bottom"
+        (click)="getDetailContract(delivery._id,delivery.name)">
+        <ion-avatar slot="start">
+          <img [src]="delivery.logoImage">
+        </ion-avatar>
+        <ion-label>
+          <h1><b>{{delivery.name}}Fast delivery</b></h1>
+          <ion-label *ngIf="delivery.acceptContractDate" color="success">
+            <h3>
+              <ion-icon name="checkmark-circle"></ion-icon>
+              <!-- <ion-icon style="vertical-align: text-bottom;" name="checkmark-circle"></ion-icon> -->
+              คุณได้เข้าร่วมแล้ว
+            </h3>
+          </ion-label>
         </ion-label>
-      </ion-label>
-    </ion-item>
+      </ion-item>
 
-    <ion-item color="light" class="ion-padding-bottom">
-      <ion-avatar slot="start">
-        <img src="https://cdn0.iconfinder.com/data/icons/transportation-163/14/Vector-12-512.png">
-      </ion-avatar>
-      <ion-label>
-        <h1><b>Food prada</b></h1>
-      </ion-label>
-    </ion-item>
+      <!-- <ion-item color="light" class="ion-padding-bottom">
+        <ion-avatar slot="start">
+          <img src="https://cdn0.iconfinder.com/data/icons/transportation-163/14/Vector-12-512.png">
+        </ion-avatar>
+        <ion-label>
+          <h1><b>Food prada</b></h1>
+        </ion-label>
+      </ion-item>
 
-    <ion-item color="light" class="ion-padding-bottom">
-      <ion-avatar slot="start">
-        <img src="https://cdn0.iconfinder.com/data/icons/transportation-163/14/Vector-12-512.png">
-      </ion-avatar>
-      <ion-label>
-        <h1><b>Prab delivery</b></h1>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+      <ion-item color="light" class="ion-padding-bottom">
+        <ion-avatar slot="start">
+          <img src="https://cdn0.iconfinder.com/data/icons/transportation-163/14/Vector-12-512.png">
+        </ion-avatar>
+        <ion-label>
+          <h1><b>Prab delivery</b></h1>
+        </ion-label>
+      </ion-item> -->
+    </ion-list>
+  </ng-container>
+
+
 </ion-content>

@@ -5,107 +5,111 @@
 </ion-header>
 
 <ion-content mode="ios" color="light">
-  <ion-item lines="none" color="light">
-    <ion-avatar slot="start">
-      <img src="https://cdn0.iconfinder.com/data/icons/transportation-163/14/Vector-12-512.png">
-    </ion-avatar>
-    <ion-label>
-      <h1><b>Fast Delivery</b></h1>
-      <ion-text color="secondary">
-        <h3>ร้านที่เข้าร่วมทั้งหมด 52 ร้านค้า</h3>
-      </ion-text>
-      <ion-label color="success">
-        <h3>
-          <ion-icon name="checkmark-circle"></ion-icon>
-          <!-- <ion-icon style="vertical-align: text-bottom;" name="checkmark-circle"></ion-icon> -->
-          คุณได้เข้าร่วมแล้ว
-        </h3>
-      </ion-label>
-    </ion-label>
-  </ion-item>
-  <ion-list lines="full">
-    <ion-item color="light">
+  <ng-container *ngIf="data$ | async as data">
+    <ion-item lines="none" color="light">
+      <ion-avatar slot="start">
+        <img [src]="data.logoImage">
+      </ion-avatar>
       <ion-label>
-        <h3>
-          <b>
-            ที่อยู่บริษัท
-          </b>
-        </h3>
+        <h1><b>{{data.name}}</b></h1>
         <ion-text color="secondary">
-          <h3 class="ion-text-wrap">99/5, ตำบลศิลา, อำเภอเมืองขอนแก่น, ขอนแก่น, 40000</h3>
+          <h3>ร้านที่เข้าร่วมทั้งหมด {{data.length}} ร้านค้า</h3>
         </ion-text>
-        <h3>
-          <b>
-            เบอร์ติดต่อ
-          </b>
-        </h3>
-        <ion-text color="secondary">
-          <h3>087-31258736</h3>
-        </ion-text>
+        <ion-label *ngIf="data.restaurantOnService" color="success">
+          <h3>
+            <ion-icon name="checkmark-circle"></ion-icon>
+            <!-- <ion-icon style="vertical-align: text-bottom;" name="checkmark-circle"></ion-icon> -->
+            คุณได้เข้าร่วมแล้ว
+          </h3>
+        </ion-label>
       </ion-label>
     </ion-item>
+    <ion-list lines="full">
+      <ion-item color="light">
+        <ion-label>
+          <h3>
+            <b>
+              ที่อยู่บริษัท
+            </b>
+          </h3>
+          <ion-text color="secondary">
+            <h3 class="ion-text-wrap">{{data.address}}</h3>
+          </ion-text>
+          <h3>
+            <b>
+              เบอร์ติดต่อ
+            </b>
+          </h3>
+          <ion-text color="secondary">
+            <h3>{{data.tel }}</h3>
+          </ion-text>
+        </ion-label>
+      </ion-item>
 
-    <ion-item color="light">
-      <ion-label>
-        <h1>
-          <b>
-            ข้อตกลงและสัญญา
-          </b>
-        </h1>
-        <br>
-        <h3>
-          <b>
-            วันเริ่มต้นสัญญา
-          </b>
-        </h3>
-        <h2>
-          <b>
-            10 พฤษภาคม 2563
-          </b>
-        </h2>
-      </ion-label>
-    </ion-item>
-    <ion-item color="light">
-      <ion-label>
-        <h3>
-          <b>
-            ชื่อสัญญา
-          </b>
-        </h3>
-        <h2>
-          <b>
-            Contract A
-          </b>
-        </h2>
-      </ion-label>
-    </ion-item>
-    <ion-item color="light">
-      <ion-label>
-        <h3>
-          <b>
-            เปอร์เซ็นที่หักร้านอาหาร
-          </b>
-        </h3>
-        <h2>
-          <b>
-            20%
-          </b>
-        </h2>
-      </ion-label>
-    </ion-item>
-    <ion-item color="light" lines="none">
-      <ion-label>
-        <h3>
-          <b>
-            ค่าส่ง
-          </b>
-        </h3>
-        <h2>
-          <b>
-            10 บาท
-          </b>
-        </h2>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+      <div *ngIf="data.restaurantOnService">
+        <ion-item color="light">
+          <ion-label>
+            <h1>
+              <b>
+                ข้อตกลงและสัญญา
+              </b>
+            </h1>
+            <br>
+            <h3>
+              <b>
+                วันเริ่มต้นสัญญา
+              </b>
+            </h3>
+            <h2>
+              <b>
+                {{data.contract?.createDate  | date:'dd/MMM/yyyy' }}
+              </b>
+            </h2>
+          </ion-label>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label>
+            <h3>
+              <b>
+                ชื่อสัญญา
+              </b>
+            </h3>
+            <h2>
+              <b>
+                {{data.contract?.name}}
+              </b>
+            </h2>
+          </ion-label>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label>
+            <h3>
+              <b>
+                เปอร์เซ็นที่หักร้านอาหาร
+              </b>
+            </h3>
+            <h2>
+              <b>
+                {{data.contract?.commissionPercent}}%
+              </b>
+            </h2>
+          </ion-label>
+        </ion-item>
+        <ion-item color="light" lines="none">
+          <ion-label>
+            <h3>
+              <b>
+                ค่าส่ง
+              </b>
+            </h3>
+            <h2>
+              <b>
+                {{data.contract?.deliveryPricePerOrder?.amountUnit | number}} บาท
+              </b>
+            </h2>
+          </ion-label>
+        </ion-item>
+      </div>
+    </ion-list>
+  </ng-container>
 </ion-content>
