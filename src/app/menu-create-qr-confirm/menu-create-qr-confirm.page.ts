@@ -1,4 +1,4 @@
-import { NativeService } from 'src/providers/navigateService';
+import { NativeService } from 'src/providers/NativeService';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
