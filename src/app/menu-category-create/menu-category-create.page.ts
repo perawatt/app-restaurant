@@ -9,11 +9,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./menu-category-create.page.scss'],
 })
 export class MenuCategoryCreatePage implements OnInit {
+  
   public fg: FormGroup;
-  lstOptions = [];
-  name: any;
-  price: number;
-  canNote = false;
+  public lstOptions = [];
+  public name: any;
+  public price: number;
+  public canNote = false;
   constructor(private fb: FormBuilder, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) {
     this.fg = this.fb.group({
       'name': [null, Validators.required],

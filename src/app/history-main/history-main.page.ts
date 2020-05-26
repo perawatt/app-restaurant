@@ -9,10 +9,9 @@ import { RestaurantService } from '../../services/restaurant.service';
 })
 export class HistoryMainPage implements OnInit {
 
-  date: Date = new Date();
-  data$ = Promise.resolve([]);
+  public date: Date = new Date();
+  public data$ = Promise.resolve([]);
   public totalToday: number = 0;
-  
   constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
   ngOnInit() {

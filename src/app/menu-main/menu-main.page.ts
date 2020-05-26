@@ -9,10 +9,9 @@ import { NativeService } from 'src/providers/NativeService';
 })
 export class MenuMainPage implements OnInit {
 
-  data$ = Promise.resolve([]);
-  segmentValue: any;
+  public data$ = Promise.resolve([]);
+  public segmentValue: any;
   public category: any;
-
   constructor(public actionSheetController: ActionSheetController, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
   ngOnInit() {

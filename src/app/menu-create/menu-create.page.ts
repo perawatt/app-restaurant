@@ -14,11 +14,12 @@ import { IUploadProgress } from 'src/services/blob-storage/iblob-storage';
   styleUrls: ['./menu-create.page.scss'],
 })
 export class MenuCreatePage implements OnInit {
-  fg: FormGroup;
-  file: any;
-  sas: any;
-  uploadProgress$: Observable<IUploadProgress[]>;
-  catagory$ = Promise.resolve([]);
+  
+  public fg: FormGroup;
+  public file: any;
+  public sas: any;
+  public uploadProgress$: Observable<IUploadProgress[]>;
+  public catagory$ = Promise.resolve([]);
   constructor(private blobStorage: BlobStorageService, private fb: FormBuilder, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) {
     this.fg = this.fb.group({
       'name': [null, Validators.required],
