@@ -27,7 +27,6 @@ export class RestaurantService implements IRestaurantService {
     return this.http.get(apiUrl).toPromise();
   }
 
-
   async getOrderList(): Promise<any> {
     var restaurantId = await this.svc.GetRestaurantId();
     let apiUrl = this.baseUrl + "GetUnfinishedOrder/" + restaurantId;
@@ -47,6 +46,24 @@ export class RestaurantService implements IRestaurantService {
     return this.http.get(apiUrl).toPromise();
   }
 
+  async getDeliveryService(): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "GetDeliveryService/" + restaurantId;
+    return this.http.get(apiUrl).toPromise();
+  }
+
+  async getDeliveryServiceById(deliveryId: string): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "GetDeliveryService/" + restaurantId + '/' + deliveryId;
+    return this.http.get(apiUrl).toPromise();
+  }
+
+  async getRestaurantSetting(): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "GetRestaurantSetting/" + restaurantId;
+    return this.http.get(apiUrl).toPromise();
+  }
+
   async createOrderCancelRequest(orderId: string, data: any): Promise<any> {
     var restaurantId = await this.svc.GetRestaurantId();
     let apiUrl = this.baseUrl + "CancelOrderRequest/" + restaurantId + "/" + orderId;
@@ -61,7 +78,37 @@ export class RestaurantService implements IRestaurantService {
 
   async createProduct(data: any): Promise<any> {
     var restaurantId = await this.svc.GetRestaurantId();
-    let apiUrl = this.baseUrl + "createProduct/" + restaurantId;
+    let apiUrl = this.baseUrl + "CreateProduct/" + restaurantId;
+    return this.http.post(apiUrl, data).toPromise();
+  }
+
+  async createProductFromQR(data: any): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "AddMenuFromQr/" + restaurantId;
+    return this.http.post(apiUrl, data).toPromise();
+  }
+
+  async createRestStandbyOn(): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "RestaurantStandbyTurnOn/" + restaurantId;
+    return this.http.post(apiUrl, {}).toPromise();
+  }
+
+  async createRestStandbyOff(): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "RestaurantStandbyTurnOff/" + restaurantId;
+    return this.http.post(apiUrl, {}).toPromise();
+  }
+
+  async createRestStandbyTempOff(min: string): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "RestaurantStandbyTurnOff/" + restaurantId + '/' + min;
+    return this.http.post(apiUrl, {}).toPromise();
+  }
+
+  async createRestSchedule(data: any): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "SetRestaurantSchedule/" + restaurantId;
     return this.http.post(apiUrl, data).toPromise();
   }
 
