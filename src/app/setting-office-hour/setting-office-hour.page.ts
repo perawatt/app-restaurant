@@ -18,34 +18,34 @@ export class SettingOfficeHourPage implements OnInit {
   iThursday = false;
   isFriday = false;
   isSaturday = false;
-  sunday = {
+  sunday = [{
     'orderFromTime': 0,
     'orderThruTime': 0
-  };
-  monday = {
+  }];
+  monday = [{
     'orderFromTime': 0,
     'orderThruTime': 0
-  };
-  tuesday = {
+  }];
+  tuesday = [{
     'orderFromTime': 0,
     'orderThruTime': 0
-  };
-  wednesday = {
+  }];
+  wednesday = [{
     'orderFromTime': 0,
     'orderThruTime': 0
-  };
-  thursday = {
+  }];
+  thursday = [{
     'orderFromTime': 0,
     'orderThruTime': 0
-  };
-  friday = {
+  }];
+  friday = [{
     'orderFromTime': 0,
     'orderThruTime': 0
-  };
-  saturday = {
+  }];
+  saturday = [{
     'orderFromTime': 0,
     'orderThruTime': 0
-  };
+  }];
 
   constructor(private fb: FormBuilder, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) {
     this.fg = this.fb.group({
@@ -56,6 +56,7 @@ export class SettingOfficeHourPage implements OnInit {
       'thursday': null,
       'friday': null,
       'saturday': null,
+      'temporaryCloseThruTime': null,
     });
   }
 
