@@ -11,6 +11,8 @@ export class MenuMainPage implements OnInit {
 
   data$ = Promise.resolve([]);
   segmentValue: any;
+  public category: any;
+
   constructor(public actionSheetController: ActionSheetController, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
   ngOnInit() {
@@ -19,11 +21,16 @@ export class MenuMainPage implements OnInit {
   ionViewDidEnter() {
     this.nativeSvc.SetPageTitle("เมนูของร้านคุณ");
     this.data$ = this.restaurantSvc.getRestaurantMenu();
+    this.data$.then(it => {
+      this.category = it[0].categoryId;
+      this.segmentChanged(it[0].categoryId);
+      console.log(it);
+    })
   }
 
-  segmentChanged(ev: any) {
-    console.log('Segment changed', ev.target.value);
-    this.segmentValue = ev.target.value;
+  segmentChanged(id: any) {
+    console.log('Segment changed', id);
+    this.segmentValue = id;
   }
 
   async presentActionSheet() {

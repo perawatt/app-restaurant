@@ -12,19 +12,20 @@
             <p>00.20 นาที</p>
           </ion-label>
           <ion-note slot="end" class="ion-text-end">
-            <ion-text color="dark"><b>ราคารวม ฿270</b></ion-text>
+            <ion-text color="dark"><b>ราคารวม ฿{{ data.totalPrice }} </b></ion-text>
           </ion-note>
         </ion-item>
-        <ion-item color="light" *ngFor="let product of data.orderList">
+        <ion-item color="light" *ngFor="let product of data.productList">
           <ion-label>
-            <h2><b>นมเย็น</b></h2>
+            <h2><b> {{ product.name}} </b></h2>
             <ion-text color="danger">
-              <p>หวานปกติ</p>
+              <p *ngIf="product.option"> {{ product.option}} </p>
+              <p *ngIf="!product.option">&nbsp;</p>
             </ion-text>
           </ion-label>
           <ion-note slot="end" class="ion-text-end">
             <ion-label color="dark">
-              <h2><b>฿35</b></h2>
+              <h2><b>฿{{ product.price}} </b></h2>
               <ion-text color="dark">
                 <p><b>ยกเลิก</b></p>
               </ion-text>

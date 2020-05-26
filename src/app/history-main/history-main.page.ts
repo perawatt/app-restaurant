@@ -9,17 +9,22 @@ import { RestaurantService } from '../../services/restaurant.service';
 })
 export class HistoryMainPage implements OnInit {
 
-  date: Date =  new Date();
+  date: Date = new Date();
   data$ = Promise.resolve([]);
+  public totalToday: number = 0;
+  
   constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
   ngOnInit() {
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.nativeSvc.SetPageTitle("ออเดอร์ย้อนหลัง");
     this.data$ = this.restaurantSvc.getOrderHistories(this.date);
     console.log(this.date);
-    
+    this.data$.then(it => {
+      this.totalToday = it.filter(i => !i.cancelDate).map(i => i.totalPrice).reduce((a, b) => a + b);
+      console.log(this.totalToday);
+    })
   }
 }
