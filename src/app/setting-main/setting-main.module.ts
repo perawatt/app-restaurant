@@ -1,3 +1,4 @@
+import { PipesModule } from './../../pipes/pipes.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,8 +14,9 @@ import { SettingMainPage } from './setting-main.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    SettingMainPageRoutingModule
+    SettingMainPageRoutingModule,
+    PipesModule,
   ],
   declarations: [SettingMainPage]
 })
-export class SettingMainPageModule {}
+export class SettingMainPageModule { }

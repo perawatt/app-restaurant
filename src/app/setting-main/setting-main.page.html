@@ -20,43 +20,43 @@
               <div *ngIf="items.sunday.length != 0 ">
                 <h2>อาทิตย์</h2>
                 <div *ngFor="let day of items.sunday">
-                  <h2>เวลา {{day.orderFromTime}}-{{day.orderThruTime}} น.</h2>
+                  <h2>เวลา {{day.orderFromTime | dateConverter}}-{{day.orderThruTime | dateConverter}} น.</h2>
                 </div>
               </div>
               <div *ngIf="items.monday.length != 0 ">
                 <h2>จันทร์</h2>
                 <div *ngFor="let day of items.monday">
-                  <h2>เวลา {{day.orderFromTime}}-{{day.orderThruTime}} น.</h2>
+                  <h2>เวลา {{day.orderFromTime | dateConverter}}-{{day.orderThruTime | dateConverter}} น.</h2>
                 </div>
               </div>
               <div *ngIf="items.tuesday.length != 0 ">
                 <h2>อังคาร</h2>
                 <div *ngFor="let day of items.tuesday">
-                  <h2>เวลา {{day.orderFromTime}}-{{day.orderThruTime}} น.</h2>
+                  <h2>เวลา {{day.orderFromTime | dateConverter}}-{{day.orderThruTime | dateConverter}} น.</h2>
                 </div>
               </div>
               <div *ngIf="items.wednesday.length != 0 ">
                 <h2>พุธ</h2>
                 <div *ngFor="let day of items.wednesday">
-                  <h2>เวลา {{day.orderFromTime}}-{{day.orderThruTime}} น.</h2>
+                  <h2>เวลา {{day.orderFromTime | dateConverter}}-{{day.orderThruTime | dateConverter}} น.</h2>
                 </div>
               </div>
               <div *ngIf="items.thursday.length != 0 ">
                 <h2>พฤหัสบดี</h2>
                 <div *ngFor="let day of items.thursday">
-                  <h2>เวลา {{day.orderFromTime}}-{{day.orderThruTime}} น.</h2>
+                  <h2>เวลา {{day.orderFromTime | dateConverter}}-{{day.orderThruTime | dateConverter}} น.</h2>
                 </div>
               </div>
               <div *ngIf="items.friday.length != 0 ">
                 <h2>ศุกร์</h2>
                 <div *ngFor="let day of items.friday">
-                  <h2>เวลา {{day.orderFromTime}}-{{day.orderThruTime}} น.</h2>
+                  <h2>เวลา {{day.orderFromTime | dateConverter}}-{{day.orderThruTime | dateConverter}} น.</h2>
                 </div>
               </div>
               <div *ngIf="items.saturday.length != 0 ">
                 <h2>เสาร์</h2>
                 <div *ngFor="let day of items.saturday">
-                  <h2>เวลา {{day.orderFromTime}}-{{day.orderThruTime}} น.</h2>
+                  <h2>เวลา {{day.orderFromTime | dateConverter}}-{{day.orderThruTime | dateConverter}} น.</h2>
                 </div>
               </div>
             </ion-label>
