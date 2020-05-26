@@ -1,57 +1,133 @@
-<ion-header>
-  <ion-toolbar color="warning">
-    <ion-title color="light">ตั้งค่า</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <ion-list>
-    <ion-list-header mode="md">
-      <ion-label>
-        <h1><b>เวลาทำการ</b></h1>
-      </ion-label>
-    </ion-list-header>
-    <ion-item color="light">
-      <ion-label>
-        <h2><b>เปิดร้าน</b></h2>
-      </ion-label>
-      <ion-toggle slot="end" color="success"></ion-toggle>
-    </ion-item>
-    <ion-item lines="none" color="light">
-      <ion-label>
-        <h2><b>เวลาทำการร้าน</b> </h2>
-        <ion-label color="secondary">
-          <h2>จันทร์ - เสาร์</h2>
-          <h2>เวลา 11:00-19:00 น.</h2>
+  <ng-container *ngIf="data$ | async as data">
+    <ion-list>
+      <ion-list-header mode="md">
+        <ion-label>
+          <h1><b>เวลาทำการ</b></h1>
         </ion-label>
-      </ion-label>
-    </ion-item>
-    <ion-item color="light" lines="none">
-      <ion-label color="">
-        <h2 class="ion-margin-top"><b> วันหยุด</b></h2>
-        <ion-label color="secondary"><h2>อาทิตย์</h2></ion-label>
-      </ion-label>
-    </ion-item>
-    <ion-item lines="none" color="light" class="ion-padding-bottom ">
-      <ion-button color="secondary" shape="round" size="default" class="center">
-        <ion-label color="medium">
-          <ion-icon name="time-outline"></ion-icon>
-          ตั้งเวลาเปิด-ปิดร้าน
+      </ion-list-header>
+      <ion-item color="light">
+        <ion-label>
+          <h2><b>เปิดร้าน</b></h2>
         </ion-label>
-      </ion-button>
-    </ion-item>
-  </ion-list>
-  <ion-list lines="none" class="ion-margin-top">
-    <ion-list-header mode="md">
-      <ion-label>
-        <h1><b>การแจ้งเตือน</b></h1>
-      </ion-label>
-    </ion-list-header>
-    <ion-item color="light" class="ion-padding-bottom">
-      <ion-label>
-        <h2><b>เสียง</b></h2>
-      </ion-label>
-      <ion-toggle slot="end" color="success"></ion-toggle>
-    </ion-item>
-  </ion-list>
+        <ion-toggle (ionChange)="toggleChange($event)" [checked]="data.restaurantStandby" slot="end" color="success"></ion-toggle>
+      </ion-item>
+      <ion-item lines="none" color="light">
+        <ion-label>
+          <h2><b>เวลาทำการร้าน</b> </h2>
+          <div *ngIf="data.schedule  as items">
+            <ion-label color="secondary">
+              <div *ngIf="items.sunday.length != 0 ">
+                <h2>อาทิตย์</h2>
+                <div *ngFor="let day of items.sunday">
+                  <h2>เวลา {{day.orderFromTime | dateConverter}}-{{day.orderThruTime | dateConverter}} น.</h2>
+                </div>
+              </div>
+              <div *ngIf="items.monday.length != 0 ">
+                <h2>จันทร์</h2>
+                <div *ngFor="let day of items.monday">
+                  <h2>เวลา {{day.orderFromTime | dateConverter}}-{{day.orderThruTime | dateConverter}} น.</h2>
+                </div>
+              </div>
+              <div *ngIf="items.tuesday.length != 0 ">
+                <h2>อังคาร</h2>
+                <div *ngFor="let day of items.tuesday">
+                  <h2>เวลา {{day.orderFromTime | dateConverter}}-{{day.orderThruTime | dateConverter}} น.</h2>
+                </div>
+              </div>
+              <div *ngIf="items.wednesday.length != 0 ">
+                <h2>พุธ</h2>
+                <div *ngFor="let day of items.wednesday">
+                  <h2>เวลา {{day.orderFromTime | dateConverter}}-{{day.orderThruTime | dateConverter}} น.</h2>
+                </div>
+              </div>
+              <div *ngIf="items.thursday.length != 0 ">
+                <h2>พฤหัสบดี</h2>
+                <div *ngFor="let day of items.thursday">
+                  <h2>เวลา {{day.orderFromTime | dateConverter}}-{{day.orderThruTime | dateConverter}} น.</h2>
+                </div>
+              </div>
+              <div *ngIf="items.friday.length != 0 ">
+                <h2>ศุกร์</h2>
+                <div *ngFor="let day of items.friday">
+                  <h2>เวลา {{day.orderFromTime | dateConverter}}-{{day.orderThruTime | dateConverter}} น.</h2>
+                </div>
+              </div>
+              <div *ngIf="items.saturday.length != 0 ">
+                <h2>เสาร์</h2>
+                <div *ngFor="let day of items.saturday">
+                  <h2>เวลา {{day.orderFromTime | dateConverter}}-{{day.orderThruTime | dateConverter}} น.</h2>
+                </div>
+              </div>
+            </ion-label>
+          </div>
+        </ion-label>
+      </ion-item>
+      <ion-item color="light" lines="none">
+        <ion-label color="">
+          <h2 class="ion-margin-top"><b> วันหยุด</b></h2>
+          <ion-label *ngIf="data.schedule  as items" class="ion-text-wrap" color="secondary">
+            <ion-row>
+              <ion-col size="3" *ngIf="items.sunday.length == 0">
+                <h2>
+                  อาทิตย์
+                </h2>
+              </ion-col>
+              <ion-col size="3" *ngIf="items.monday.length == 0">
+                <h2>
+                  จันทร์
+                </h2>
+              </ion-col>
+              <ion-col size="3" *ngIf="items.tuesday.length == 0">
+                <h2>
+                  อังคาร
+                </h2>
+              </ion-col>
+              <ion-col size="3" *ngIf="items.wednesday.length == 0">
+                <h2>
+                  พุธ
+                </h2>
+              </ion-col>
+              <ion-col size="3" *ngIf="items.thursday.length == 0">
+                <h2>
+                  พฤหัสบดี
+                </h2>
+              </ion-col>
+              <ion-col size="3" *ngIf="items.friday.length == 0">
+                <h2>
+                  ศุกร์
+                </h2>
+              </ion-col>
+              <ion-col size="3" *ngIf="items.saturday.length == 0">
+                <h2>
+                  เสาร์
+                </h2>
+              </ion-col>
+            </ion-row>
+          </ion-label>
+        </ion-label>
+      </ion-item>
+      <ion-item lines=" none" color="light" class="ion-padding-bottom">
+        <ion-button (click)="setSchedule()" color="secondary" shape="round" size="default" class="center">
+          <ion-label color="medium">
+            <ion-icon name="time-outline"></ion-icon>
+            ตั้งเวลาเปิด-ปิดร้าน
+          </ion-label>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+    <ion-list lines="none" class="ion-margin-top">
+      <ion-list-header mode="md">
+        <ion-label>
+          <h1><b>การแจ้งเตือน</b></h1>
+        </ion-label>
+      </ion-list-header>
+      <ion-item color="light" class="ion-padding-bottom">
+        <ion-label>
+          <h2><b>เสียง</b></h2>
+        </ion-label>
+        <ion-toggle slot="end" color="success"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ng-container>
 </ion-content>
