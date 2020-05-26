@@ -12,6 +12,12 @@ export interface IRestaurantService {
 
     getOrderHistories(date: Date): Promise<any>;
 
+    getDeliveryService(): Promise<any>;
+
+    getDeliveryServiceById(deliveryId: string): Promise<any>;
+
+    getRestaurantSetting(): Promise<any>;
+
     getSasToken(): Promise<any>;
 
     createOrderCancelRequest(orderId: string, data: any): Promise<any>;
@@ -19,5 +25,15 @@ export interface IRestaurantService {
     createCategory(data: any): Promise<any>;
 
     createProduct(data: any): Promise<any>;
+
+    createProductFromQR(data: any): Promise<any>;
+
+    createRestStandbyOn(): Promise<any>;
+
+    createRestStandbyOff(): Promise<any>;
+
+    createRestStandbyTempOff(min: string): Promise<any>;
+
+    createRestSchedule(data: any): Promise<any>;
 
 }
