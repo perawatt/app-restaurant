@@ -102,7 +102,7 @@ export class RestaurantService implements IRestaurantService {
 
   async createRestStandbyTempOff(min: string): Promise<any> {
     var restaurantId = await this.svc.GetRestaurantId();
-    let apiUrl = this.baseUrl + "RestaurantStandbyTurnOff/" + restaurantId + '/' + min;
+    let apiUrl = this.baseUrl + "RestaurantStandbyTemporaryTurnOff/" + restaurantId + '/' + min;
     return this.http.post(apiUrl, {}).toPromise();
   }
 
