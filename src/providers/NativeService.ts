@@ -65,7 +65,7 @@ export class NativeService {
         }
     }
 
-    public RegisterNotificationHander(notiChannel: string, fn: () => void) {
+    public RegisterNotificationHander(notiChannel: string, fn: (params) => void) {
         if (this.NotificationCannel.has(notiChannel)) {
             this.NotificationCannel.delete(notiChannel);
         }
