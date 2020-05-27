@@ -31,7 +31,7 @@
         </ion-list-header>
         <ion-item color="light" *ngFor="let menu of data.products">
           <ion-thumbnail slot="start" class="ion-margin-vertical">
-            <img [src]="getImage(menu.perviewImageId) | async">
+            <img [src]="menu.previewImageUrl">
           </ion-thumbnail>
           <ion-text>
             <ion-label color="dark">
