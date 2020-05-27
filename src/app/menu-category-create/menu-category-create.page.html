@@ -19,7 +19,7 @@
       <ion-input type="text" [(ngModel)]="name" placeholder="กรุณาระบุ"></ion-input>
       <ion-label>บวกราคา</ion-label>
       <ion-input type="number" (ionFocus)="price = null" [(ngModel)]="price" placeholder="0"></ion-input>
-      <ion-button shape="round" (click)="addOptions(name,price)" color="success" size="small">
+      <ion-button shape="round" (click)="addOptions()" color="success" size="small">
         <ion-label color="light">+ เพิ่ม</ion-label>
       </ion-button>
     </ion-item>
