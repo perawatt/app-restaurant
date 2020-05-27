@@ -13,9 +13,18 @@ export class MenuCategoryEditPage implements OnInit {
   constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
   ngOnInit() {
+    this.nativeSvc.RegisterRefreshOnGoBack(() => this.getCategory());
+  }
+
+  ionViewDidEnter() {
     this.nativeSvc.SetPageTitle("แก้ไขหมวดหมู่");
+    this.getCategory();
+  }
+
+  getCategory(){
     this.data$ = this.restaurantSvc.getCategoryList();
   }
+
 
   createCategoty() {
     this.nativeSvc.NavigateToPage("menu-category-create");

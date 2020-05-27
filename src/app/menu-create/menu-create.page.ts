@@ -49,10 +49,10 @@ export class MenuCreatePage implements OnInit {
     console.log(this.fg);
 
     if (this.fg.valid) {
-      this.restaurantSvc.getSasToken().then(it => {
+      this.restaurantSvc.getSasManaUpload().then(it => {
         this.sas = it;
-        this.fg.get('previewImageId').patchValue(this.sas.imageId);
-        this.restaurantSvc.createProduct(this.fg.value).then(_ => {
+        this.fg.get('previewImageId').patchValue(this.sas.imageId);      
+        this.restaurantSvc.createProduct(this.fg.value).then(_ => {          
           this.uploadProgress$ = from(this.file as FileList).pipe(
             map(file => this.uploadFile(file)),
             combineAll(),
