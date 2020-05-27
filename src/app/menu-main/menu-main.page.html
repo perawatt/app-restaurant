@@ -11,7 +11,8 @@
   <ng-container *ngIf="data$ | async as item">
     <ion-list lines="full" class="ion-no-padding">
       <ion-item color="light">
-        <ion-segment scrollable="true" (ionChange)="segmentChanged(category)" [(ngModel)]="category" lines="none" mode="md" color="warning">
+        <ion-segment scrollable="true" (ionChange)="segmentChanged(category)" [(ngModel)]="category" lines="none"
+          mode="md" color="warning">
           <div *ngFor="let data of item">
             <ion-segment-button *ngIf="data.products.length > 0" [value]="data.categoryId">
               <ion-label><b> {{data.categoryName}}</b></ion-label>
@@ -30,7 +31,7 @@
         </ion-list-header>
         <ion-item color="light" *ngFor="let menu of data.products">
           <ion-thumbnail slot="start" class="ion-margin-vertical">
-            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+            <img [src]="getImage(menu.perviewImageId) | async">
           </ion-thumbnail>
           <ion-text>
             <ion-label color="dark">

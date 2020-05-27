@@ -33,6 +33,10 @@ export class MenuMainPage implements OnInit {
     })
   }
 
+  getImage(imageId: string) {
+    return this.restaurantSvc.getImageUpload(imageId);
+  }
+
   segmentChanged(id: any) {
     console.log('Segment changed', id);
     this.segmentValue = id;
