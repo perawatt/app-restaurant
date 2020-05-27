@@ -21,9 +21,10 @@ export class MenuMainPage implements OnInit {
     this.nativeSvc.SetPageTitle("เมนูของร้านคุณ");
     this.data$ = this.restaurantSvc.getRestaurantMenu();
     this.data$.then(it => {
-      this.category = it[0].categoryId;
-      this.segmentChanged(it[0].categoryId);
       console.log(it);
+      let qry = it.filter(i => i.products.length > 0);
+      this.category = qry[0].categoryId;
+      this.segmentChanged(qry[0].categoryId);
     })
   }
 
