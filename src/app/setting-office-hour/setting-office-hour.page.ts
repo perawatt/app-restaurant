@@ -1,7 +1,9 @@
+import { async } from '@angular/core/testing';
 import { Component, OnInit } from '@angular/core';
 import { NativeService } from 'src/providers/NativeService';
 import { RestaurantService } from 'src/services/restaurant.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { newArray } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-setting-office-hour',
@@ -63,7 +65,32 @@ export class SettingOfficeHourPage implements OnInit {
     this.nativeSvc.SetPageTitle("ตั้งเวลาเปิด-ปิดร้าน");
   }
 
-  setSchedule() {
+  convertDateToNum(valueDate): number {
+    if (valueDate != 0) {
+      let data = new Date(valueDate);
+      let arrayNum = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+      let hours = data.getHours().toString();
+      let minite = data.getMinutes().toString();
+      minite = arrayNum.some(it => it == minite) ? '0' + minite : minite;
+      return Number(hours + minite);
+    } else return 0;
+  }
+
+  convertProcess() {
+    this.sunday[0].orderFromTime = this.convertDateToNum(this.sunday[0].orderFromTime);
+    this.sunday[0].orderThruTime = this.convertDateToNum(this.sunday[0].orderThruTime);
+    this.monday[0].orderFromTime = this.convertDateToNum(this.monday[0].orderFromTime);
+    this.monday[0].orderThruTime = this.convertDateToNum(this.monday[0].orderThruTime);
+    this.tuesday[0].orderFromTime = this.convertDateToNum(this.tuesday[0].orderFromTime);
+    this.tuesday[0].orderThruTime = this.convertDateToNum(this.tuesday[0].orderThruTime);
+    this.wednesday[0].orderFromTime = this.convertDateToNum(this.wednesday[0].orderFromTime);
+    this.wednesday[0].orderThruTime = this.convertDateToNum(this.wednesday[0].orderThruTime);
+    this.thursday[0].orderFromTime = this.convertDateToNum(this.thursday[0].orderFromTime);
+    this.thursday[0].orderThruTime = this.convertDateToNum(this.thursday[0].orderThruTime);
+    this.friday[0].orderFromTime = this.convertDateToNum(this.friday[0].orderFromTime);
+    this.friday[0].orderThruTime = this.convertDateToNum(this.friday[0].orderThruTime);
+    this.saturday[0].orderFromTime = this.convertDateToNum(this.saturday[0].orderFromTime);
+    this.saturday[0].orderThruTime = this.convertDateToNum(this.saturday[0].orderThruTime);
     this.fg.get('sunday').patchValue(this.sunday);
     this.fg.get('monday').patchValue(this.monday);
     this.fg.get('tuesday').patchValue(this.tuesday);
@@ -72,11 +99,13 @@ export class SettingOfficeHourPage implements OnInit {
     this.fg.get('friday').patchValue(this.friday);
     this.fg.get('saturday').patchValue(this.saturday);
     console.log(this.fg);
+  }
 
+  setSchedule() {
+    this.convertProcess();
     if (this.fg.valid) {
       this.restaurantSvc.createRestSchedule(this.fg.value)
       this.nativeSvc.NavigateToPage("setting-main");
     }
-
   }
 }
