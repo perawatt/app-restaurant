@@ -112,9 +112,19 @@ export class RestaurantService implements IRestaurantService {
     return this.http.post(apiUrl, data).toPromise();
   }
 
-  async getSasToken(): Promise<any> {
+  getSasToken(): Promise<any> {
     let apiUrl = 'https://delivery-3rd-api.azurewebsites.net/api/Storage/Up2Cloud';
     return this.http.post(apiUrl, {}).toPromise();
+  }
+
+  getSasManaUpload(): Promise<any> {
+    let apiUrl = 'https://manamockapi.azurewebsites.net/Image/sas?type=1&refid=1&serviceId=1&bizAccountId=1';
+    return this.http.get(apiUrl).toPromise();
+  }
+
+  getImageUpload(imageId: string): Promise<any> {
+    let apiUrl = 'https://manamockapi.azurewebsites.net/Image/' + imageId;
+    return this.http.get(apiUrl).toPromise();
   }
 
   private baseUrl: string = API_URL;

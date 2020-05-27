@@ -20,6 +20,10 @@ export interface IRestaurantService {
 
     getSasToken(): Promise<any>;
 
+    getSasManaUpload(): Promise<any>;
+
+    getImageUpload(imageId: string): Promise<any>; 
+
     createOrderCancelRequest(orderId: string, data: any): Promise<any>;
 
     createCategory(data: any): Promise<any>;

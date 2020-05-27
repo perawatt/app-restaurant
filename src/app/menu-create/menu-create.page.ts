@@ -14,7 +14,7 @@ import { IUploadProgress } from 'src/services/blob-storage/iblob-storage';
   styleUrls: ['./menu-create.page.scss'],
 })
 export class MenuCreatePage implements OnInit {
-  
+
   public fg: FormGroup;
   public file: any;
   public sas: any;
@@ -49,9 +49,10 @@ export class MenuCreatePage implements OnInit {
     console.log(this.fg);
 
     if (this.fg.valid) {
-      this.restaurantSvc.createProduct(this.fg.value).then(_ => {
-        this.restaurantSvc.getSasToken().then(it => {
-          this.sas = it;
+      this.restaurantSvc.getSasToken().then(it => {
+        this.sas = it;
+        this.fg.get('previewImageId').patchValue(this.sas.imageId);
+        this.restaurantSvc.createProduct(this.fg.value).then(_ => {
           this.uploadProgress$ = from(this.file as FileList).pipe(
             map(file => this.uploadFile(file)),
             combineAll(),
@@ -65,9 +66,9 @@ export class MenuCreatePage implements OnInit {
   uploadFile(file: File): Observable<IUploadProgress> {
     var accessToken: ISasToken = {
       container: this.sas.containerName,
-      filename: file.name,
-      storageAccessToken: this.sas.complementary,
-      storageUri: this.sas.blobUrl
+      filename: this.sas.imageId,
+      storageAccessToken: this.sas.saS,
+      storageUri: this.sas.storageUri
     };
     return this.blobStorage
       .uploadToBlobStorage(accessToken, file)
