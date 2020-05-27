@@ -18,6 +18,6 @@ export class MenuCategoryEditPage implements OnInit {
   }
 
   createCategoty() {
-    this.nativeSvc.NavigateToPage("menu-create");
+    this.nativeSvc.NavigateToPage("menu-catagory-create");
   }
 }

@@ -15,9 +15,14 @@ export class MenuMainPage implements OnInit {
   constructor(public actionSheetController: ActionSheetController, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
   ngOnInit() {
+    this.nativeSvc.RegisterRefreshOnGoBack(() => this.getMenu());
   }
 
   ionViewDidEnter() {
+    this.getMenu();
+  }
+
+  getMenu(){
     this.nativeSvc.SetPageTitle("เมนูของร้านคุณ");
     this.data$ = this.restaurantSvc.getRestaurantMenu();
     this.data$.then(it => {
