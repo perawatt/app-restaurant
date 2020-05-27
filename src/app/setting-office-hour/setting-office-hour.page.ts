@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NativeService } from 'src/providers/NativeService';
 import { RestaurantService } from 'src/services/restaurant.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { LstSchedule } from 'src/environments/environment';
 
 @Component({
   selector: 'app-setting-office-hour',
