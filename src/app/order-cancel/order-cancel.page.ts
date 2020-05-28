@@ -24,7 +24,7 @@ export class OrderCancelPage implements OnInit {
     this.data$ = this.restaurantSvc.getOrderInfo(this.orderId);
   }
 
-  async cancelOrderConfirm(orderId: string) {
+  async cancelOrderConfirm() {
     await this.restaurantSvc.createOrderCancelRequest(this.orderId, { heading: "ไม่สามารถทำอาหารได้", info: "" }).then(() => 
     { 
       this.nativeSvc.GoBack();  
