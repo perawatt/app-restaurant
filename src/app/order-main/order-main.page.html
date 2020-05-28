@@ -9,7 +9,8 @@
         </ion-item>
         <ion-item color="light" lines="full">
           <ion-label color="secondary">
-            <p>00.20 นาที</p>
+            <!-- todo -->
+            <p>- นาที</p>
           </ion-label>
           <ion-note slot="end" class="ion-text-end">
             <ion-text color="dark"><b>ราคารวม ฿{{ order.totalPrice }} </b></ion-text>
@@ -17,7 +18,7 @@
         </ion-item>
         <ion-item color="light" *ngFor="let product of order.productList">
           <ion-label>
-            <h2><b> {{ product.name}} </b></h2>
+            <h2><b>x{{ product.quantity }} {{ product.name}} </b></h2>
             <ion-text color="danger">
               <p *ngIf="product.option"> {{ product.option}} </p>
               <p *ngIf="!product.option">&nbsp;</p>
@@ -25,7 +26,7 @@
           </ion-label>
           <ion-note slot="end" class="ion-text-end">
             <ion-label color="dark">
-              <h2><b>฿{{ product.price}}  </b></h2>
+              <h2><b>฿{{ product.quantity * product.price | number }}</b></h2>
               <ion-text color="dark">
                 <p><b>&nbsp;</b></p>
               </ion-text>
