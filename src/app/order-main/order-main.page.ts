@@ -12,25 +12,38 @@ export class OrderMainPage implements OnInit {
   public data$ = Promise.resolve([]);
   constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.getOrderList()
+
+    this.Norificationhandler({"Status":"Shipping"});
   }
 
   ngOnInit() {
     this.nativeSvc.SetPageTitle("ออเดอร์วันนี้");
 
-    this.nativeSvc.RegisterNotificationHander("SendOrder", (param) => this.getOrderList());
-    this.nativeSvc.RegisterRefreshOnGoBack(()=>this.getOrderList());
+    this.nativeSvc.RegisterNotificationHander("UpdateOrderStatus", (param) => this.Norificationhandler(param));
+    this.nativeSvc.RegisterRefreshOnGoBack(() => this.getOrderList());
   }
-  
-  cancelOrder(_orderId: string){
+
+  Norificationhandler(notiParam: any) {
+    switch(notiParam.Status) {
+      case "AcceptRequest" :this.getOrderList(); break;
+      case "Shipping": this.getOrderList(); break;
+      //TODO: Add popup when cancel confirm or deny
+      case "CancelConfirm": this.getOrderList(); break;
+      case "CancelDeny": this.getOrderList(); break;
+      default : break;
+    }
+  }
+
+  cancelOrder(_orderId: string) {
     this.nativeSvc.NavigateToPage("order-cancel", { orderId: _orderId });
   }
 
-  getOrderList(){
+  getOrderList() {
     this.data$ = this.restaurantSvc.getOrderList();
-    this.data$.then(it=>{
+    this.data$.then(it => {
+      console.log(it);
     })
-
   }
 }
