@@ -98,7 +98,6 @@ export class SettingOfficeHourPage implements OnInit {
     this.fg.get('thursday').patchValue(this.thursday);
     this.fg.get('friday').patchValue(this.friday);
     this.fg.get('saturday').patchValue(this.saturday);
-    console.log(this.fg);
   }
 
   setSchedule() {

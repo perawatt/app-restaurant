@@ -20,7 +20,6 @@ export class SettingMainPage implements OnInit {
   }
 
   toggleChange(event) {
-    console.log(event);
     if (event.target.checked) {
       this.restaurantSvc.createRestStandbyOn();
     }
