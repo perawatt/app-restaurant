@@ -13,7 +13,7 @@
             <p>- นาที</p>
           </ion-label>
           <ion-note slot="end" class="ion-text-end">
-            <ion-text color="dark"><b>ราคารวม ฿{{ data.totalPrice }} </b></ion-text>
+            <ion-text color="dark"><b>ราคารวม ฿{{ data.totalPrice | number }} </b></ion-text>
           </ion-note>
         </ion-item>
         <ion-item color="light" *ngFor="let product of data.productList">

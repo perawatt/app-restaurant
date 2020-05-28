@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NativeService } from '../../providers/NativeService';
 import { RestaurantService } from '../../services/restaurant.service';
+import { ModalController } from '@ionic/angular';
+import { OrderCancelApproveModalsPage } from 'src/modals/order-cancel-approve-modals/order-cancel-approve-modals.page';
 
 @Component({
   selector: 'app-order-main',
@@ -10,7 +12,7 @@ import { RestaurantService } from '../../services/restaurant.service';
 export class OrderMainPage implements OnInit {
 
   public data$ = Promise.resolve([]);
-  constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
+  constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService, private modalController: ModalController) { }
 
   ionViewDidEnter() {
     this.getOrderList()
@@ -34,6 +36,8 @@ export class OrderMainPage implements OnInit {
       case "CancelDeny": this.getOrderList(); break;
       default : break;
     }
+    this.nativeSvc.RegisterNotificationHander("SendOrder", (param) => this.getOrderList());
+    this.nativeSvc.RegisterRefreshOnGoBack(() => this.getOrderList());
   }
 
   cancelOrder(_orderId: string) {
@@ -42,8 +46,15 @@ export class OrderMainPage implements OnInit {
 
   getOrderList() {
     this.data$ = this.restaurantSvc.getOrderList();
-    this.data$.then(it => {
-      console.log(it);
-    })
   }
+
+ //todo รอ Noti แจ้งอนุมัติคำขอยกเลิก
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: OrderCancelApproveModalsPage,
+      cssClass: 'dialog-modal-4-order-success'
+    });
+    return await modal.present();
+  }
+
 }

@@ -36,7 +36,7 @@
             <p>- นาที</p>
           </ion-label>
           <ion-note slot="end" class="ion-text-end">
-            <ion-text [color]="order.cancelDate ? 'tertiary' : 'dark'"><b>ราคารวม ฿{{ order.totalPrice }}</b></ion-text>
+            <ion-text [color]="order.cancelDate ? 'tertiary' : 'dark'"><b>ราคารวม ฿{{ order.totalPrice | number }}</b></ion-text>
           </ion-note>
         </ion-item>
         <ion-item color="light" *ngFor="let product of order.productList">
