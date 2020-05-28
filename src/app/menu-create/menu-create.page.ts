@@ -4,11 +4,10 @@ import { RestaurantService } from 'src/services/restaurant.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { combineAll, map } from 'rxjs/operators';
 import { from, Observable } from 'rxjs';
-import { ISasToken } from 'src/services/blob-storage/azureStorage';
-import { BlobStorageService } from 'src/services/blob-storage/blob-storage.service';
 import { IUploadProgress } from 'src/services/blob-storage/iblob-storage';
 import { UploadFileService } from 'src/services/upload-file/upload-file.service';
 import { LoadingController, AlertController } from '@ionic/angular';
+import { async } from 'rxjs/internal/scheduler/async';
 
 @Component({
   selector: 'app-menu-create',
@@ -68,7 +67,6 @@ export class MenuCreatePage implements OnInit {
         });
         await loading.present();
         this.restaurantSvc.getSasManaUpload().then(it => {
-          console.log(it);
           this.sas = it;
           this.uploadProgress$ = from(this.file as FileList).pipe(
             map(file => this.uploadFileSvc.uploadFile(file, this.sas)),
@@ -77,8 +75,6 @@ export class MenuCreatePage implements OnInit {
 
           this.uploadProgress$.subscribe(
             _ => {
-              console.log("process upload: ", _);
-
               if (_.find(it => it.progress >= 100)) {
                 formData.previewImageId = this.sas.imageId
                 this.restaurantSvc.createProduct(formData).then(_ => {

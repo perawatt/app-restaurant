@@ -30,7 +30,6 @@ export class OrderMainPage implements OnInit {
   getOrderList(){
     this.data$ = this.restaurantSvc.getOrderList();
     this.data$.then(it=>{
-      console.log(it);
     })
 
   }
