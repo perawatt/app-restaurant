@@ -70,6 +70,7 @@ const routes: Routes = [
     loadChildren: () => import('./menu-category-create/menu-category-create.module').then( m => m.MenuCategoryCreatePageModule)
   },
 
+
 ];
 
 @NgModule({

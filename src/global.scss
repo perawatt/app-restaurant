@@ -35,3 +35,18 @@ ion-card{
     margin-left: auto;
     margin-right: auto;
 }
+
+.dialog-modal-4-order-success .modal-wrapper {
+    width: 80%;
+    height: 40%;
+    border-radius: 8px;
+}
+
+.avatar{
+    width: 100px;
+    height: 100px;
+}
+
+.no-scroll {
+    --overflow: hidden;
+}

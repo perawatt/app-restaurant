@@ -12,12 +12,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { NativeService } from '../providers/NativeService';
 import { BlobStorageService } from 'src/services/blob-storage/blob-storage.service';
 import { BLOB_STORAGE_TOKEN, IAzureStorage } from 'src/services/blob-storage/azureStorage';
+import { ModalsModule } from 'src/modals/modals.module';
 declare var AzureStorage: IAzureStorage;
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,
+  imports: [BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule, 
+    HttpClientModule,
+    ModalsModule,
   ],
   providers: [
     StatusBar,
