@@ -36,7 +36,7 @@ export class NativeService {
         if (environment.production) {
             this.callAppMethod("Goback", "");
         } else {
-            this.navCtrl.pop();
+            this.navCtrl.back();
         }
     }
 
