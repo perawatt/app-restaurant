@@ -27,8 +27,7 @@ export class OrderCancelPage implements OnInit {
   async cancelOrderConfirm(orderId: string) {
     await this.restaurantSvc.createOrderCancelRequest(this.orderId, { heading: "ไม่สามารถทำอาหารได้", info: "" }).then(() => 
     { 
-      // TODO กลับไปหน้าก่อนหน้าโดยใช้คำสั่งเก้น
-      this.nativeSvc.NavigateToPage("order-main");  
+      this.nativeSvc.GoBack();  
     })
   }
 
