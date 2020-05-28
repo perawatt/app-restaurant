@@ -4,7 +4,8 @@
       <ion-item *ngFor=" let delivery of data" color="light" class="ion-padding-bottom"
         (click)="getDetailContract(delivery._id,delivery.name)">
         <ion-avatar slot="start">
-          <img [src]="delivery.logoImage">
+          <img
+            [src]="delivery.logoImage != null ? delivery.logoImage:'https://cdn0.iconfinder.com/data/icons/transportation-163/14/Vector-12-512.png'">
         </ion-avatar>
         <ion-label>
           <h1><b>{{delivery.name}}Fast delivery</b></h1>
