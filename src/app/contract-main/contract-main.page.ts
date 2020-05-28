@@ -8,7 +8,7 @@ import { RestaurantService } from 'src/services/restaurant.service';
   styleUrls: ['./contract-main.page.scss'],
 })
 export class ContractMainPage implements OnInit {
-  
+
   public data$ = Promise.resolve([]);
   constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
@@ -18,7 +18,7 @@ export class ContractMainPage implements OnInit {
   }
 
   getDetailContract(_id: string, name: string) {
-    this.nativeSvc.NavigateToPage("contract-detail", { deliveryId: _id, deliveryName: name });
+    this.nativeSvc.NavigateToPage("contract-detail", { deliveryId: _id });
 
   }
 }
