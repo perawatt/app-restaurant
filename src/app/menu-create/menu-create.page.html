@@ -1,4 +1,3 @@
-
 <ion-content mode="ios" color="light">
   <form [formGroup]="fg" (ngSubmit)="submit()">
     <ion-list class="ion-no-padding" color="light">
@@ -15,8 +14,7 @@
         </ion-select>
       </ion-item>
       <ion-item color="light" lines="none">
-        <img class="ion-margin-vertical"
-          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" height="120">
+        <img class="ion-margin-vertical" src="../../assets/image/dfmenu@3x.png" height="120">
         <ion-button shape="round" size="default" color="secondary">
           <!-- <ion-label color="light">เปลี่ยนรูป</ion-label> -->
           <ion-input type="file" accept="photo" multiple="true" (ionChange)="selectPhoto($event)">
