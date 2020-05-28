@@ -7,6 +7,8 @@ import { from, Observable } from 'rxjs';
 import { ISasToken } from 'src/services/blob-storage/azureStorage';
 import { BlobStorageService } from 'src/services/blob-storage/blob-storage.service';
 import { IUploadProgress } from 'src/services/blob-storage/iblob-storage';
+import { UploadFileService } from 'src/services/upload-file/upload-file.service';
+import { LoadingController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-menu-create',
@@ -17,10 +19,11 @@ export class MenuCreatePage implements OnInit {
 
   public fg: FormGroup;
   public file: any;
+  onAction: boolean;
   public sas: any;
   public uploadProgress$: Observable<IUploadProgress[]>;
   public catagory$ = Promise.resolve([]);
-  constructor(private blobStorage: BlobStorageService, private fb: FormBuilder, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) {
+  constructor(private alertCtr: AlertController, private loadingCtr: LoadingController, private uploadFileSvc: UploadFileService, private fb: FormBuilder, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) {
     this.fg = this.fb.group({
       'name': [null, Validators.required],
       "categoryName": [null, Validators.required],
@@ -45,39 +48,60 @@ export class MenuCreatePage implements OnInit {
     reader.readAsDataURL(this.file[0]);
   }
 
-  submit() {
-    console.log(this.fg);
-
+  async submit() {
     if (this.fg.valid) {
-      this.restaurantSvc.getSasManaUpload().then(it => {
-        this.sas = it;
-        this.fg.get('previewImageId').patchValue(this.sas.imageId);      
-        this.restaurantSvc.createProduct(this.fg.value).then(_ => {          
+      this.onAction = true;
+      let formData = this.fg.value;
+      if (this.file == null) {
+        this.restaurantSvc.createProduct(formData).then(_ => {
+          this.nativeSvc.GoBack();
+        });
+      }
+      else {
+        const loading = await this.loadingCtr.create({
+          message: 'Image Uploading....'
+        });
+        const alert = await this.alertCtr.create({
+          header: 'Error',
+          message: 'Image Upload Failed.',
+          buttons: ['OK']
+        });
+        await loading.present();
+        this.restaurantSvc.getSasManaUpload().then(it => {
+          console.log(it);
+          this.sas = it;
           this.uploadProgress$ = from(this.file as FileList).pipe(
-            map(file => this.uploadFile(file)),
+            map(file => this.uploadFileSvc.uploadFile(file, this.sas)),
             combineAll(),
           );
-        })
-        this.nativeSvc.GoBack();
-      });
-    }
-  }
 
-  uploadFile(file: File): Observable<IUploadProgress> {
-    var accessToken: ISasToken = {
-      container: this.sas.containerName,
-      filename: this.sas.imageId,
-      storageAccessToken: this.sas.saS,
-      storageUri: this.sas.storageUri
-    };
-    return this.blobStorage
-      .uploadToBlobStorage(accessToken, file)
-      .pipe(map(progress => this.mapProgress(file, progress)));
-  }
-  private mapProgress(file: File, progress: number): IUploadProgress {
-    return {
-      filename: file.name,
-      progress: progress
-    };
+          this.uploadProgress$.subscribe(
+            _ => {
+              console.log("process upload: ", _);
+
+              if (_.find(it => it.progress >= 100)) {
+                formData.previewImageId = this.sas.imageId
+                this.restaurantSvc.createProduct(formData).then(_ => {
+                  loading.dismiss();
+                  this.nativeSvc.GoBack();
+                }, async _ => {
+                  const alert = await this.alertCtr.create({
+                    header: 'Error',
+                    message: _.error.message,
+                    buttons: ['ตกลง']
+                  });
+
+                  await alert.present();
+                  this.onAction = false;
+                });
+              }
+            }, error => {
+              loading.dismiss();
+              alert.present();
+              this.onAction = false;
+            })
+        });
+      }
+    }
   }
 }

@@ -31,7 +31,8 @@
         </ion-list-header>
         <ion-item color="light" *ngFor="let menu of data.products">
           <ion-thumbnail slot="start" class="ion-margin-vertical">
-            <img [src]="menu.previewImageUrl">
+            <img
+              [src]="menu.previewImageUrl != null ? menu.previewImageUrl :'https://images.assetsdelivery.com/compings_v2/themoderncanvas/themoderncanvas1602/themoderncanvas160200117.jpg'">
           </ion-thumbnail>
           <ion-text>
             <ion-label color="dark">
