@@ -16,7 +16,9 @@
     </ion-item>
     <ion-item color="dark" lines="none" class="ion-text-center">
       <ion-label>
-        <h3> ดูรายได้วันอื่นๆ
+        <h3>
+          <img src="assets/imgs/cash@3x.png" height="10" alt="">
+          ดูรายได้วันอื่นๆ
         </h3>
       </ion-label>
     </ion-item>
@@ -36,7 +38,8 @@
             <p>- นาที</p>
           </ion-label>
           <ion-note slot="end" class="ion-text-end">
-            <ion-text [color]="order.cancelDate ? 'tertiary' : 'dark'"><b>ราคารวม ฿{{ order.totalPrice | number }}</b></ion-text>
+            <ion-text [color]="order.cancelDate ? 'tertiary' : 'dark'"><b>ราคารวม ฿{{ order.totalPrice | number }}</b>
+            </ion-text>
           </ion-note>
         </ion-item>
         <ion-item color="light" *ngFor="let product of order.productList">
