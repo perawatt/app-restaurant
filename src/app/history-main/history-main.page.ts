@@ -14,14 +14,24 @@ export class HistoryMainPage implements OnInit {
   public totalToday: number = 0;
   constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
-  ngOnInit() {
+  ionViewDidEnter() {
+    this.getOrderHistories()
   }
 
-  ionViewDidEnter() {
+  ngOnInit() {
     this.nativeSvc.SetPageTitle("ออเดอร์ย้อนหลัง");
+    this.nativeSvc.RegisterRefreshOnGoBack(() => this.getOrderHistories());
+  }
+
+  getOrderHistories() {
     this.data$ = this.restaurantSvc.getOrderHistories(this.date);
     this.data$.then(it => {
       this.totalToday = it.filter(i => !i.cancelDate).map(i => i.totalPrice).reduce((a, b) => a + b);
     })
+  }
+
+  bikerDetail(orderId: string) {
+    console.log(orderId);
+    this.nativeSvc.NavigateToPage("biker-detail", { orderId: orderId });
   }
 }
