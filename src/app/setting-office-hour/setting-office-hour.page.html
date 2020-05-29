@@ -155,7 +155,7 @@
   </ion-list>
 </ion-content>
 <ion-footer mode="ios">
-  <ion-button (click)="setSchedule()" class="ion-no-margin" expand="full" color="warning">
+  <ion-button (click)="setSchedule()" class="ion-no-margin" expand="full" color="warning" [disabled]="fg.invalid">
     <ion-label color="light"> <b>ตกลง</b></ion-label>
   </ion-button>
 </ion-footer>
