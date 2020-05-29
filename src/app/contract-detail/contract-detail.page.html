@@ -2,14 +2,14 @@
   <ng-container *ngIf="data$ | async as data">
     <ion-item lines="none" color="light">
       <ion-avatar slot="start">
-        <img [src]="data.logoImage != null ? data.logoImage:'../../assets/image/dfbiker@3x.png'">
+        <img [src]="data.logoImage != null ? data.logoImage:'assets/image/dfbiker@3x.png'">
       </ion-avatar>
       <ion-label>
         <h1><b>{{data.name}}</b></h1>
         <ion-text color="secondary">
-          <h3>ร้านที่เข้าร่วมทั้งหมด {{data.length}} ร้านค้า</h3>
+          <h3>ร้านที่เข้าร่วมทั้งหมด {{data.restaurantOnService}} ร้านค้า</h3>
         </ion-text>
-        <ion-label *ngIf="data.restaurantOnService" color="success">
+        <ion-label *ngIf="data.acceptContractDate" color="success">
           <h3>
             <ion-icon name="checkmark-circle"></ion-icon>
             <!-- <ion-icon style="vertical-align: text-bottom;" name="checkmark-circle"></ion-icon> -->
@@ -56,7 +56,7 @@
             </h3>
             <h2>
               <b>
-                {{data.contract?.createDate  | date:'dd/MMM/yyyy' }}
+                {{data.contract?.createDate  | date:'dd MMM yyyy' }}
               </b>
             </h2>
           </ion-label>

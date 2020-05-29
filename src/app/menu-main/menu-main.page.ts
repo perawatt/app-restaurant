@@ -39,6 +39,7 @@ export class MenuMainPage implements OnInit {
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
       header: 'ปรับแต่งเมนูร้านของคุณ',
+      mode: 'ios',
       buttons: [
         {
           text: 'เพิ่มเมนู',
