@@ -18,6 +18,7 @@ export class BikerDetailPage implements OnInit {
   }
 
   ngOnInit() {
+    this.nativeSvc.SetPageTitle("ติดต่อผู้ส่ง");
     this.order$ = this.restaurantSvc.getOrderInfo(this.orderId);
     this.order$.then((it: any) => {
       this.phoneNo = it.biker.tel;
