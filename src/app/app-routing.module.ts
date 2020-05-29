@@ -68,7 +68,11 @@ const routes: Routes = [
   {
     path: 'menu-category-create',
     loadChildren: () => import('./menu-category-create/menu-category-create.module').then( m => m.MenuCategoryCreatePageModule)
+  },  {
+    path: 'biker-detail',
+    loadChildren: () => import('./biker-detail/biker-detail.module').then( m => m.BikerDetailPageModule)
   },
+
 
 
 ];

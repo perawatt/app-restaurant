@@ -16,13 +16,11 @@ export class OrderMainPage implements OnInit {
 
   ionViewDidEnter() {
     this.getOrderList()
-
     this.notificationhandler({"Status":"Shipping"});
   }
 
   ngOnInit() {
     this.nativeSvc.SetPageTitle("ออเดอร์วันนี้");
-
     this.nativeSvc.RegisterNotificationHander("UpdateOrderStatus", (param) => this.notificationhandler(param));
     this.nativeSvc.RegisterRefreshOnGoBack(() => this.getOrderList());
   }
@@ -55,6 +53,11 @@ export class OrderMainPage implements OnInit {
       cssClass: 'dialog-modal-4-order-success'
     });
     return await modal.present();
+  }
+
+  bikerDetail(orderId: string) {
+    console.log(orderId);
+    this.nativeSvc.NavigateToPage("biker-detail", { orderId: orderId });
   }
 
 }

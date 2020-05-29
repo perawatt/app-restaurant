@@ -35,7 +35,7 @@
         </ion-item>
 
         <ion-item lines="none" color="light">
-          <ion-label color="success">
+          <ion-label color="success" (click)="bikerDetail(order._id)">
             <ion-icon name="call"></ion-icon> ผู้ส่ง
           </ion-label>
           <ion-note *ngIf="!order.cancelRequestId" slot="end" class="ion-text-end">
