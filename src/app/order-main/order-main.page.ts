@@ -17,17 +17,17 @@ export class OrderMainPage implements OnInit {
   ionViewDidEnter() {
     this.getOrderList()
 
-    this.Norificationhandler({"Status":"Shipping"});
+    this.notificationhandler({"Status":"Shipping"});
   }
 
   ngOnInit() {
     this.nativeSvc.SetPageTitle("ออเดอร์วันนี้");
 
-    this.nativeSvc.RegisterNotificationHander("UpdateOrderStatus", (param) => this.Norificationhandler(param));
+    this.nativeSvc.RegisterNotificationHander("UpdateOrderStatus", (param) => this.notificationhandler(param));
     this.nativeSvc.RegisterRefreshOnGoBack(() => this.getOrderList());
   }
 
-  Norificationhandler(notiParam: any) {
+  notificationhandler(notiParam: any) {
     switch(notiParam.Status) {
       case "AcceptRequest" :this.getOrderList(); break;
       case "Shipping": this.getOrderList(); break;
