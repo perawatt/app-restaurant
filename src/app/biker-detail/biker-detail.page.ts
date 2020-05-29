@@ -19,8 +19,8 @@ export class BikerDetailPage implements OnInit {
 
   ngOnInit() {
     this.order$ = this.restaurantSvc.getOrderInfo(this.orderId);
-    this.order$.then(it => {
-     this.phoneNo = it.biker.tel;
+    this.order$.then((it: any) => {
+      this.phoneNo = it.biker.tel;
     })
   }
 
