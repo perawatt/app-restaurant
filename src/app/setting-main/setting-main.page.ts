@@ -11,17 +11,47 @@ import { AlertController } from '@ionic/angular';
 })
 export class SettingMainPage implements OnInit {
   data$ = Promise.resolve([]);
-
+  alert: any;
   constructor(private alertController: AlertController, private route: ActivatedRoute, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
   ngOnInit() {
     this.nativeSvc.SetPageTitle("ตั้งค่า");
+
+  }
+
+  ionViewWillEnter() {
+    this.loadData();
+  }
+
+  async loadData() {
+    this.alert = await this.alertController.create({
+      header: 'เกิดข้อผิดพลาด',
+      message: "",
+      buttons: [{
+        text: 'ตกลง',
+        handler: () => {
+          this.loadData();
+        },
+      }],
+      backdropDismiss: false
+    });
     this.data$ = this.restaurantSvc.getRestaurantSetting();
+    this.data$.then(_ => {
+    }, async error => {
+      this.alert.message = error.error.message;
+
+      await this.alert.present();
+    });
   }
 
   toggleChange(event) {
     if (event.target.checked) {
-      this.restaurantSvc.createRestStandbyOn();
+      this.restaurantSvc.createRestStandbyOn().then(_ => {
+      }, async error => {
+        this.alert.message = error.error.message;
+
+        await this.alert.present();
+      });;
     }
     else {
       this.presentAlert();
@@ -37,7 +67,12 @@ export class SettingMainPage implements OnInit {
           text: 'ปิดร้านทันที',
           role: 'cancel',
           handler: (blah) => {
-            this.restaurantSvc.createRestStandbyOff();
+            this.restaurantSvc.createRestStandbyOff().then(_ => {
+            }, async error => {
+              this.alert.message = error.error.message;
+
+              await this.alert.present();
+            });;
           }
         }, {
           text: 'ปิดชั่วคราว',
@@ -73,7 +108,12 @@ export class SettingMainPage implements OnInit {
         {
           text: 'ตกลง',
           handler: (min) => {
-            this.restaurantSvc.createRestStandbyTempOff(min);
+            this.restaurantSvc.createRestStandbyTempOff(min).then(_ => {
+            }, async error => {
+              this.alert.message = error.error.message;
+
+              await this.alert.present();
+            });
           }
         }
       ]
