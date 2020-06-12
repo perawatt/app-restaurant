@@ -4,6 +4,7 @@ import { NativeService } from 'src/providers/NativeService';
 import { RestaurantService } from 'src/services/restaurant.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { newArray } from '@angular/compiler/src/util';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-setting-office-hour',
@@ -48,7 +49,7 @@ export class SettingOfficeHourPage implements OnInit {
     'orderThruTime': 0
   }];
 
-  constructor(private fb: FormBuilder, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) {
+  constructor(private alertCtr: AlertController, private fb: FormBuilder, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) {
     this.fg = this.fb.group({
       'sunday': null,
       'monday': null,
@@ -100,11 +101,26 @@ export class SettingOfficeHourPage implements OnInit {
     this.fg.get('saturday').patchValue(this.saturday);
   }
 
-  setSchedule() {
+  async setSchedule() {
+    const alert = await this.alertCtr.create({
+      header: 'เกิดข้อผิดพลาด',
+      message: "",
+      buttons: [{
+        text: 'ตกลง',
+        handler: () => {
+        },
+      }],
+      backdropDismiss: false
+    });
     this.convertProcess();
     if (this.fg.valid) {
-      this.restaurantSvc.createRestSchedule(this.fg.value)
-      this.nativeSvc.NavigateToPage("setting-main");
+      this.restaurantSvc.createRestSchedule(this.fg.value).then((it: any) => {
+        this.nativeSvc.GoBack();
+      }, async error => {
+        alert.message = error.error.message;
+
+        await alert.present();
+      }
     }
   }
 }
