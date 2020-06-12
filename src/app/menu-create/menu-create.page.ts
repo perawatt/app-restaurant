@@ -34,7 +34,29 @@ export class MenuCreatePage implements OnInit {
 
   ngOnInit() {
     this.nativeSvc.SetPageTitle("เพิ่มเมนู");
+    this.getCategory()
+  }
+
+  async getCategory() {
+    const alert = await this.alertCtr.create({
+      header: 'เกิดข้อผิดพลาด',
+      message: "",
+      buttons: [{
+        text: 'ตกลง',
+        handler: () => {
+          this.nativeSvc.GoBack();
+        },
+      }],
+      backdropDismiss: false
+    });
+
     this.catagory$ = this.restaurantSvc.getCategoryList();
+    this.catagory$.then((it: any) => {
+    }, async error => {
+      alert.message = error.error.message;
+
+      await alert.present();
+    })
   }
 
   selectPhoto(event) {
