@@ -14,7 +14,7 @@ export class OrderMainPage implements OnInit {
   public data$ = Promise.resolve([]);
   constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService, private modalController: ModalController) { }
 
-  ionViewDidEnter() {
+  ionViewWillEnter() {
     this.getOrderList()
     this.notificationhandler({"Status":"Shipping"});
   }
