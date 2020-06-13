@@ -120,7 +120,7 @@ export class SettingOfficeHourPage implements OnInit {
         alert.message = error.error.message;
 
         await alert.present();
-      }
+      })
     }
   }
 }
