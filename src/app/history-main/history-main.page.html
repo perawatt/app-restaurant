@@ -34,8 +34,7 @@
         </ion-item>
         <ion-item color="light" lines="full">
           <ion-label color="secondary">
-            <!-- todo -->
-            <p>- นาที</p>
+            <p>{{ order.createDate | date:'M/d/y (H.mm)' }}</p>
           </ion-label>
           <ion-note slot="end" class="ion-text-end">
             <ion-text [color]="order.cancelDate ? 'tertiary' : 'dark'"><b>ราคารวม ฿{{ order.totalPrice | number }}</b>
