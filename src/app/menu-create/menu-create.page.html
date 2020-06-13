@@ -15,11 +15,11 @@
       </ion-item>
       <ion-item color="light" lines="none">
         <img class="ion-margin-vertical" src="assets/imgs/dfmenu.png" height="120">
-        <ion-button shape="round" size="default" color="secondary">
-          <!-- <ion-label color="light">เปลี่ยนรูป</ion-label> -->
-          <ion-input type="file" accept="photo" multiple="true" (ionChange)="selectPhoto($event)">
-          </ion-input>
-        </ion-button>
+        <!-- <ion-button shape="round" size="default" color="secondary"> -->
+        <ion-input type="file" name="file" id="file" class="file-input" accept="photo" multiple="false"
+          (ionChange)="selectPhoto($event)"></ion-input>
+        <ion-label for="file" class="ion-text-center file-input-label" color="tertiary">เปลี่ยนรูป</ion-label>
+        <!-- </ion-button> -->
       </ion-item>
       <ion-item color="light" lines="inset">
         <ion-input type="text" formControlName="name" placeholder="กรุณาตั้งชื่อเมนูของคุณ"></ion-input>
