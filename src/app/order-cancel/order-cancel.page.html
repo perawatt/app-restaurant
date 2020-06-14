@@ -9,8 +9,7 @@
         </ion-item>
         <ion-item color="light" lines="full">
           <ion-label color="secondary">
-            <!-- todo -->
-            <p>- นาที</p>
+            <p>{{ data.createDate | date:'H:mm' }}</p>
           </ion-label>
           <ion-note slot="end" class="ion-text-end">
             <ion-text color="dark"><b>ราคารวม ฿{{ data.totalPrice | number }} </b></ion-text>
