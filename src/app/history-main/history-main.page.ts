@@ -31,7 +31,6 @@ export class HistoryMainPage implements OnInit {
   }
 
   bikerDetail(orderId: string) {
-    console.log(orderId);
     this.nativeSvc.NavigateToPage("biker-detail", { orderId: orderId });
   }
 }

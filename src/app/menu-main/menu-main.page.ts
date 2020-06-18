@@ -75,11 +75,18 @@ export class MenuMainPage implements OnInit {
     await actionSheet.present();
   }
 
-  async openPopover(ev: any) {
+  async openPopover(ev: any, productId: string) {
     const popover = await this.popoverController.create({
-      component: PopoverPage,  
+      component: PopoverPage,
+      componentProps: {
+        productId: productId
+      },
       event: ev
     });
-    popover.present();
+    popover.onDidDismiss().then(it => {
+      this.getMenu();
+    });
+    return await popover.present();
+
   }
 }

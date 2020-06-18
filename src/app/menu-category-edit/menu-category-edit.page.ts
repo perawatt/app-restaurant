@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NativeService } from 'src/providers/NativeService';
 import { RestaurantService } from 'src/services/restaurant.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { ConfirmRemoveCategoryPage } from 'src/modals/confirm-remove-category/confirm-remove-category.page';
 
 @Component({
   selector: 'app-menu-category-edit',
@@ -9,9 +10,8 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./menu-category-edit.page.scss'],
 })
 export class MenuCategoryEditPage implements OnInit {
-
   public data$ = Promise.resolve([]);
-  constructor(private alertCtr: AlertController, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
+  constructor(private modalController: ModalController, private alertCtr: AlertController, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
   ngOnInit() {
     this.nativeSvc.SetPageTitle("แก้ไขหมวดหมู่");
@@ -41,6 +41,25 @@ export class MenuCategoryEditPage implements OnInit {
 
       await alert.present();
     })
+  }
+
+  editNameCategory(categoryId: string) {
+    this.nativeSvc.NavigateToPage("menu-category-edit-detail", { categoryId: categoryId });
+  }
+
+  async deleteCategory(categoryId: string) {
+    const modal = await this.modalController.create({
+      component: ConfirmRemoveCategoryPage,
+      cssClass: 'dialog-modal-4-order-success',
+      componentProps: {
+        categoryId: categoryId
+      },
+      backdropDismiss: false
+    });
+    modal.onDidDismiss().then(it => {
+      this.getCategory();
+    });
+    await modal.present();
   }
 
   createCategoty() {

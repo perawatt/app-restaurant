@@ -46,7 +46,6 @@ export class MenuCategoryEditDetailPage implements OnInit {
     });
 
     this.restaurantSvc.getCategory(this.categoryId).then((it: any) => {
-      console.log(it);
       this.fg.patchValue(it);
       this.lstOptions = this.fg.get('options').value;
       this.canNote = this.fg.get('canNote').value;
@@ -83,6 +82,7 @@ export class MenuCategoryEditDetailPage implements OnInit {
     });
     this.fg.get('options').patchValue(this.lstOptions);
     this.fg.get('canNote').patchValue(this.canNote);
+
     if (this.fg.valid) {
       this.restaurantSvc.updateCategory(this.categoryId, this.fg.value).then(_ => {
         this.nativeSvc.GoBack();

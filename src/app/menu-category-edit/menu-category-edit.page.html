@@ -15,8 +15,10 @@
         <ion-label>
           <h1>{{data.categoryName}}</h1>
         </ion-label>
-        <ion-button expand="full" fill="clear" color="dark" slot="end"><b>เปลี่ยนชื่อ</b></ion-button>
-        <ion-button expand="full" fill="clear" color="dark" slot="end"><b>ลบ</b></ion-button>
+        <ion-button expand="full" fill="clear" color="dark" slot="end" (click)="editNameCategory(data.categoryId)">
+          <b>เปลี่ยนชื่อ</b></ion-button>
+        <ion-button expand="full" fill="clear" color="dark" slot="end" (click)="deleteCategory(data.categoryId)">
+          <b>ลบ</b></ion-button>
       </ion-item>
     </ion-list>
   </ng-container>

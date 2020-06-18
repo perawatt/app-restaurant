@@ -26,7 +26,6 @@ export class MenuEditPage implements OnInit {
   alert: any;
   constructor(private route: ActivatedRoute, private alertCtr: AlertController, private loadingCtr: LoadingController, private uploadFileSvc: UploadFileService, private fb: FormBuilder, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) {
     this.route.params.subscribe(param => { this.productId = param["productId"] });
-    // this.nativeSvc.NavigateToPage("contract-detail", { deliveryId: _id });
     this.fg = this.fb.group({
       'name': [null, Validators.required],
       "categoryName": [null, Validators.required],
@@ -44,7 +43,6 @@ export class MenuEditPage implements OnInit {
 
   async getData() {
     this.restaurantSvc.getProduct(this.productId).then((it: any) => {
-      console.log(it);
       this.fg.patchValue(it);
     }, async error => {
       this.alert.message = error.error.message;
@@ -75,10 +73,7 @@ export class MenuEditPage implements OnInit {
     })
   }
   checkCategoryCanNote(): boolean {
-    console.log(this.catagory);
     let categorySelect = this.catagory && this.catagory.find((it: any) => it.categoryName == this.fg.get('categoryName').value);
-    console.log(categorySelect);
-
     return categorySelect && categorySelect.canNote;
   }
 
