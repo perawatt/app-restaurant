@@ -46,6 +46,18 @@ export class RestaurantService implements IRestaurantService {
     return this.http.get(apiUrl).toPromise();
   }
 
+  async getProduct(productId: string): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "EditProduct/" + restaurantId + '/' + productId;
+    return this.http.get(apiUrl).toPromise();
+  }
+
+  async getCategory(categoryId: string): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "EditCategory/" + restaurantId + '/' + categoryId;
+    return this.http.get(apiUrl).toPromise();
+  }
+
   async getDeliveryService(): Promise<any> {
     var restaurantId = await this.svc.GetRestaurantId();
     let apiUrl = this.baseUrl + "GetDeliveryService/" + restaurantId;
@@ -112,13 +124,40 @@ export class RestaurantService implements IRestaurantService {
     return this.http.post(apiUrl, data).toPromise();
   }
 
+  async updateProduct(productId: any, data: any): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "EditProduct/" + restaurantId + '/' + productId;
+    return this.http.post(apiUrl, data).toPromise();
+  }
+
+  async updateCategory(categoryId: any, data: any): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "EditCategory/" + restaurantId + '/' + categoryId;
+    return this.http.post(apiUrl, data).toPromise();
+  }
+
+  async deleteProduct(productId: string): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "DeleteProduct/" + restaurantId + '/' + productId;
+    return this.http.delete(apiUrl).toPromise();
+  }
+
+  async deleteCategory(categoryId: string): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "DeleteCategory/" + restaurantId + '/' + categoryId;
+    return this.http.delete(apiUrl).toPromise();
+  }
+
   getSasToken(): Promise<any> {
     let apiUrl = 'https://delivery-3rd-api.azurewebsites.net/api/Storage/Up2Cloud';
     return this.http.post(apiUrl, {}).toPromise();
   }
 
-  getSasManaUpload(): Promise<any> {
+  getSasManaUpload(imageId?: string): Promise<any> {
+    console.log(imageId);
     let apiUrl = 'https://manamockapi.azurewebsites.net/Image/sas?type=1&refid=1&serviceId=1&bizAccountId=1';
+    if (imageId) apiUrl += "&imageId=" + imageId;
+    console.log(apiUrl);
     return this.http.get(apiUrl).toPromise();
   }
 

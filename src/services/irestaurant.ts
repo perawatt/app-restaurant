@@ -20,9 +20,9 @@ export interface IRestaurantService {
 
     getSasToken(): Promise<any>;
 
-    getSasManaUpload(): Promise<any>;
+    getSasManaUpload(imageId?: string): Promise<any>;
 
-    getImageUpload(imageId: string): Promise<any>; 
+    getImageUpload(imageId: string): Promise<any>;
 
     createOrderCancelRequest(orderId: string, data: any): Promise<any>;
 
@@ -40,4 +40,15 @@ export interface IRestaurantService {
 
     createRestSchedule(data: any): Promise<any>;
 
+    getProduct(productId: string): Promise<any>;
+
+    updateProduct(productId: string, data: any): Promise<any>;
+
+    deleteProduct(productId: string): Promise<any>;
+
+    getCategory(categoryId: string): Promise<any>;
+
+    updateCategory(categoryId: string, data: any): Promise<any>;
+
+    deleteCategory(categoryId: string): Promise<any>;
 }
