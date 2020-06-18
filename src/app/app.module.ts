@@ -13,6 +13,7 @@ import { NativeService } from '../providers/NativeService';
 import { BlobStorageService } from 'src/services/blob-storage/blob-storage.service';
 import { BLOB_STORAGE_TOKEN, IAzureStorage } from 'src/services/blob-storage/azureStorage';
 import { ModalsModule } from 'src/modals/modals.module';
+import { PopoverPageModule } from './popover/popover.module';
 declare var AzureStorage: IAzureStorage;
 
 @NgModule({
@@ -23,6 +24,7 @@ declare var AzureStorage: IAzureStorage;
     AppRoutingModule, 
     HttpClientModule,
     ModalsModule,
+    PopoverPageModule,
   ],
   providers: [
     StatusBar,

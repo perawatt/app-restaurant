@@ -1,7 +1,8 @@
 import { RestaurantService } from './../../services/restaurant.service';
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController, AlertController } from '@ionic/angular';
+import { ActionSheetController, AlertController, PopoverController } from '@ionic/angular';
 import { NativeService } from 'src/providers/NativeService';
+import { PopoverPage } from '../popover/popover.page';
 @Component({
   selector: 'app-menu-main',
   templateUrl: './menu-main.page.html',
@@ -12,7 +13,7 @@ export class MenuMainPage implements OnInit {
   public data$ = Promise.resolve([]);
   public segmentValue: any;
   public category: any;
-  constructor(private alertCtr: AlertController, public actionSheetController: ActionSheetController, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
+  constructor(public popoverController: PopoverController, private alertCtr: AlertController, public actionSheetController: ActionSheetController, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
 
   ngOnInit() {
     this.nativeSvc.SetPageTitle("เมนูของร้านคุณ");
@@ -72,5 +73,13 @@ export class MenuMainPage implements OnInit {
       ]
     });
     await actionSheet.present();
+  }
+
+  async openPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopoverPage,  
+      event: ev
+    });
+    popover.present();
   }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NativeService } from '../../providers/NativeService';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RestaurantService } from '../../services/restaurant.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { ConfirmCancelOrderPage } from 'src/modals/confirm-cancel-order/confirm-cancel-order.page';
 
 @Component({
   selector: 'app-order-cancel',
@@ -13,7 +14,7 @@ export class OrderCancelPage implements OnInit {
 
   public orderId: string;
   public data$ = Promise.resolve([]);
-  constructor(private nativeSvc: NativeService, private route: ActivatedRoute, private restaurantSvc: RestaurantService, private alertCtr: AlertController) {
+  constructor(private router: Router, private modalController: ModalController, private nativeSvc: NativeService, private route: ActivatedRoute, private restaurantSvc: RestaurantService, private alertCtr: AlertController) {
     this.route.params.subscribe(param => { this.orderId = param["orderId"] });
   }
 
@@ -57,12 +58,22 @@ export class OrderCancelPage implements OnInit {
       }],
       backdropDismiss: false
     });
-    await this.restaurantSvc.createOrderCancelRequest(this.orderId, { heading: "ไม่สามารถทำอาหารได้", info: "" }).then(() => {
-      this.nativeSvc.GoBack();
-    }, async error => {
-      alert.message = error.error.message;
-      await alert.present();
-    });
+    const modal = await this.modalController.create({
+      component: ConfirmCancelOrderPage,
+      cssClass: 'dialog-modal-4-order-success',
+      componentProps: {
+      },
+      backdropDismiss: false
+    }); modal.onDidDismiss().then(it => {
+      if (it.data != null && it.data != "undefined") {
+        this.restaurantSvc.createOrderCancelRequest(this.orderId, { heading: "ไม่สามารถทำอาหารได้", info: "" }).then(() => {
+          this.nativeSvc.GoBack();
+        }, async error => {
+          alert.message = error.error.message;
+          await alert.present();
+        });
+      }
+    })
+    modal.present();
   }
-
 }
