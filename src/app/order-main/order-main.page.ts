@@ -56,7 +56,6 @@ export class OrderMainPage implements OnInit {
   }
 
   bikerDetail(orderId: string) {
-    console.log(orderId);
     this.nativeSvc.NavigateToPage("biker-detail", { orderId: orderId });
   }
 

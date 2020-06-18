@@ -60,9 +60,7 @@ export class MenuCreatePage implements OnInit {
   }
 
   checkCategoryCanNote(): boolean {
-    console.log(this.catagory);
     let categorySelect = this.catagory && this.catagory.find((it: any) => it.categoryName == this.fg.get('categoryName').value);
-    console.log(categorySelect);
 
     return categorySelect && categorySelect.canNote;
   }

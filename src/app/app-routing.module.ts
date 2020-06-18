@@ -72,7 +72,8 @@ const routes: Routes = [
   {
     path: 'biker-detail',
     loadChildren: () => import('./biker-detail/biker-detail.module').then(m => m.BikerDetailPageModule)
-  },  {
+  },
+  {
     path: 'popover',
     loadChildren: () => import('./popover/popover.module').then( m => m.PopoverPageModule)
   },
@@ -84,9 +85,6 @@ const routes: Routes = [
     path: 'menu-category-edit-detail',
     loadChildren: () => import('./menu-category-edit-detail/menu-category-edit-detail.module').then( m => m.MenuCategoryEditDetailPageModule)
   },
-
-
-
 ];
 
 @NgModule({

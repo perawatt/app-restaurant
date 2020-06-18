@@ -5,11 +5,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ConfirmRemoveMenuPage } from './confirm-remove-menu/confirm-remove-menu.page';
 import { ConfirmCancelOrderPage } from './confirm-cancel-order/confirm-cancel-order.page';
+import { ConfirmRemoveCategoryPage } from './confirm-remove-category/confirm-remove-category.page';
 
 const modals = [
   OrderCancelApproveModalsPage,
   ConfirmRemoveMenuPage,
   ConfirmCancelOrderPage,
+  ConfirmRemoveCategoryPage,
 ]
 
 @NgModule({
