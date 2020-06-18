@@ -72,6 +72,14 @@ const routes: Routes = [
     path: 'biker-detail',
     loadChildren: () => import('./biker-detail/biker-detail.module').then( m => m.BikerDetailPageModule)
   },
+  {
+    path: 'menu-edit',
+    loadChildren: () => import('./menu-edit/menu-edit.module').then( m => m.MenuEditPageModule)
+  },
+  {
+    path: 'menu-category-edit-detail',
+    loadChildren: () => import('./menu-category-edit-detail/menu-category-edit-detail.module').then( m => m.MenuCategoryEditDetailPageModule)
+  },
 
 
 

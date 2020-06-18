@@ -10,7 +10,6 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./menu-category-create.page.scss'],
 })
 export class MenuCategoryCreatePage implements OnInit {
-
   public fg: FormGroup;
   public lstOptions = [];
   public name: any;

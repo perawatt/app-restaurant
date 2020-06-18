@@ -1,27 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { IUploadProgress } from 'src/services/blob-storage/iblob-storage';
+import { Observable, from } from 'rxjs';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { UploadFileService } from 'src/services/upload-file/upload-file.service';
 import { NativeService } from 'src/providers/NativeService';
 import { RestaurantService } from 'src/services/restaurant.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { combineAll, map } from 'rxjs/operators';
-import { from, Observable } from 'rxjs';
-import { IUploadProgress } from 'src/services/blob-storage/iblob-storage';
-import { UploadFileService } from 'src/services/upload-file/upload-file.service';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { map, combineAll } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-menu-create',
-  templateUrl: './menu-create.page.html',
-  styleUrls: ['./menu-create.page.scss'],
+  selector: 'app-menu-edit',
+  templateUrl: './menu-edit.page.html',
+  styleUrls: ['./menu-edit.page.scss'],
 })
-export class MenuCreatePage implements OnInit {
+export class MenuEditPage implements OnInit {
   public fg: FormGroup;
   public file: any;
   onAction: boolean;
   public sas: any;
+  productId: string;
   public uploadProgress$: Observable<IUploadProgress[]>;
   public catagory$ = Promise.resolve([]);
   catagory: any[];
-  constructor(private alertCtr: AlertController, private loadingCtr: LoadingController, private uploadFileSvc: UploadFileService, private fb: FormBuilder, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) {
+  alert: any;
+  constructor(private route: ActivatedRoute, private alertCtr: AlertController, private loadingCtr: LoadingController, private uploadFileSvc: UploadFileService, private fb: FormBuilder, private nativeSvc: NativeService, private restaurantSvc: RestaurantService) {
+    this.route.params.subscribe(param => { this.productId = param["productId"] });
+    // this.nativeSvc.NavigateToPage("contract-detail", { deliveryId: _id });
     this.fg = this.fb.group({
       'name': [null, Validators.required],
       "categoryName": [null, Validators.required],
@@ -32,12 +37,23 @@ export class MenuCreatePage implements OnInit {
   }
 
   ngOnInit() {
-    this.nativeSvc.SetPageTitle("เพิ่มเมนู");
+    this.nativeSvc.SetPageTitle("แก้ไขเมนู");
     this.getCategory()
+    this.getData();
+  }
+
+  async getData() {
+    this.restaurantSvc.getProduct(this.productId).then((it: any) => {
+      console.log(it);
+      this.fg.patchValue(it);
+    }, async error => {
+      this.alert.message = error.error.message;
+      await this.alert.present();
+    });
   }
 
   async getCategory() {
-    const alert = await this.alertCtr.create({
+    this.alert = await this.alertCtr.create({
       header: 'เกิดข้อผิดพลาด',
       message: "",
       buttons: [{
@@ -53,12 +69,11 @@ export class MenuCreatePage implements OnInit {
     this.catagory$.then((it: any) => {
       this.catagory = it;
     }, async error => {
-      alert.message = error.error.message;
+      this.alert.message = error.error.message;
 
-      await alert.present();
+      await this.alert.present();
     })
   }
-
   checkCategoryCanNote(): boolean {
     console.log(this.catagory);
     let categorySelect = this.catagory && this.catagory.find((it: any) => it.categoryName == this.fg.get('categoryName').value);
@@ -77,12 +92,17 @@ export class MenuCreatePage implements OnInit {
     reader.readAsDataURL(this.file[0]);
   }
 
+  getPhoto(): string {
+    let urlImage = this.fg.get('previewImageId').value != null ? this.fg.get('previewImageId').value : 'assets/imgs/dfmenu.png';
+    return "https://manamockapi.azurewebsites.net/Image/" + urlImage;
+  }
+
   async submit() {
     if (this.fg.valid) {
       this.onAction = true;
       let formData = this.fg.value;
       if (this.file == null) {
-        this.restaurantSvc.createProduct(formData).then(_ => {
+        this.restaurantSvc.updateProduct(this.productId, formData).then(_ => {
           this.nativeSvc.GoBack();
         });
       }
@@ -96,7 +116,7 @@ export class MenuCreatePage implements OnInit {
           buttons: ['OK']
         });
         await loading.present();
-        this.restaurantSvc.getSasManaUpload().then(it => {
+        this.restaurantSvc.getSasManaUpload(formData.previewImageId).then(it => {
           this.sas = it;
           this.uploadProgress$ = from(this.file as FileList).pipe(
             map(file => this.uploadFileSvc.uploadFile(file, this.sas)),
@@ -107,7 +127,7 @@ export class MenuCreatePage implements OnInit {
             _ => {
               if (_.find(it => it.progress >= 100)) {
                 formData.previewImageId = this.sas.imageId
-                this.restaurantSvc.createProduct(formData).then(_ => {
+                this.restaurantSvc.updateProduct(this.productId, formData).then(_ => {
                   loading.dismiss();
                   this.nativeSvc.GoBack();
                 }, async _ => {
@@ -131,4 +151,5 @@ export class MenuCreatePage implements OnInit {
       }
     }
   }
+
 }

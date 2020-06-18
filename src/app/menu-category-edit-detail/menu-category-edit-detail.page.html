@@ -1,0 +1,54 @@
+<ion-content mode="ios" color="light">
+  <ion-list class="ion-no-padding" color="light" lines="inset">
+    <ion-list-header color="light" mode="md">
+      <ion-label class="ion-margin-top">
+        <h1><b>ตั้งชื่อหมวดหมู่</b></h1>
+      </ion-label>
+    </ion-list-header>
+    <ion-item color="light">
+      <form [formGroup]="fg">
+        <ion-input formControlName="name" placeholder="เครื่องดื่ม"></ion-input>
+      </form>
+    </ion-item>
+    <ion-list-header color="light" mode="md">
+      <ion-label class="ion-margin-top">
+        <h1><b>รายละเอียดเพิ่มเติม</b></h1>
+      </ion-label>
+    </ion-list-header>
+    <ion-item color="light">
+      <ion-input type="text" [(ngModel)]="name" placeholder="กรุณาระบุ"></ion-input>
+      <ion-label>บวกราคา</ion-label>
+      <ion-input type="number" (ionFocus)="price = null" [(ngModel)]="price" placeholder="0"></ion-input>
+      <ion-button shape="round" (click)="addOptions()" color="success" size="small">
+        <ion-label color="light">+ เพิ่ม</ion-label>
+      </ion-button>
+    </ion-item>
+
+    <ng-container *ngIf="lstOptions.length > 0 ">
+      <ion-item color="light" lines="full">
+        <ion-grid>
+          <ion-row *ngFor="let data of lstOptions" class="ion-justify-content-between">
+            <ion-col>
+              <ion-label>{{data.name}}</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>+{{data.price | number}} บาท</ion-label>
+            </ion-col>
+            <ion-col (click)="deleteOptions(data)">
+              <ion-label color="danger">ลบ</ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ng-container>
+    <ion-item color="light" lines="none">
+      <ion-label><b>เพิ่มหมายเหตุได้</b></ion-label>
+      <ion-checkbox [(ngModel)]="canNote" slot="start" color="danger"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer mode="ios">
+  <ion-button (click)="onSave()" class="ion-no-margin" expand="full" color="warning" [disabled]="fg.invalid">
+    <ion-label color="light"><b>ตกลง</b></ion-label>
+  </ion-button>
+</ion-footer>

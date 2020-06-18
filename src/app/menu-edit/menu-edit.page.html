@@ -8,16 +8,16 @@
       </ion-list-header>
       <ion-item color="light">
         <ion-label>เลือกหมวดหมู่</ion-label>
-        <ion-select color="tertiary"  formControlName="categoryName" placeholder="เลือกหมวดหมู่">
+        <ion-select color="tertiary" formControlName="categoryName" placeholder="เลือกหมวดหมู่">
           <ion-select-option *ngFor="let data of catagory$ | async" [value]="data.categoryName">{{data.categoryName}}
           </ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item color="light" lines="none">
-        <img class="ion-margin-vertical" src="assets/imgs/dfmenu.png" height="120">
+        <img class="ion-margin-vertical" [src]="getPhoto()" height="120">
         <ion-input type="file" name="file" id="file" class="file-input" accept="photo" multiple="false"
           (ionChange)="selectPhoto($event)"></ion-input>
-        <ion-label for="file" class="ion-text-center file-input-label ion-margin-start" color="tertiary">เปลี่ยนรูป</ion-label>
+        <ion-label for="file" class="ion-text-center file-input-label" color="tertiary">เปลี่ยนรูป</ion-label>
       </ion-item>
       <ion-item color="light" lines="inset">
         <ion-input type="text" formControlName="name" placeholder="กรุณาตั้งชื่อเมนูของคุณ"></ion-input>
