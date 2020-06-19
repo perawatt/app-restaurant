@@ -8,7 +8,7 @@ export const environment = {
 
 export const API_URL = 'https://delivery-3rd-api.azurewebsites.net/api/Restaurant/';
 
-export const RestaurantId = "1";
+export const RestaurantId = "637281376341148093";
 
 
 /*
