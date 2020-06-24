@@ -1,6 +1,6 @@
 <ion-content color="light" class="ion-text-center no-scroll">
-  <ion-item lines="none" color="light">
-    <ion-label class="ion-text-center ion-margin-top">
+  <ion-item lines="none" color="light" class="ion-margin-top">
+    <ion-label class="ion-text-center">
       <h2 class="ion-text-wrap"><b>อนุมัติการยกเลิกคำสั่งซื้อ</b></h2>
     </ion-label>
   </ion-item>
@@ -10,8 +10,8 @@
   <ion-row>
     <ion-col size="6"></ion-col>
     <ion-col size="6">
-      <ion-text class="ion-text-left" color="success">
-        <h3><b>ปิด</b></h3>
+      <ion-text class="ion-text-center" color="success" (click)="cancel()">
+        <h3>ปิด</h3>
       </ion-text>
     </ion-col>
   </ion-row>
