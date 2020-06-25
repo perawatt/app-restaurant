@@ -26,6 +26,7 @@ export class HistoryMainPage implements OnInit {
   getOrderHistories() {
     this.data$ = this.restaurantSvc.getOrderHistories(this.date);
     this.data$.then(it => {
+      it.sort((a, b) => new Date (b.acceptRequestDate).getTime() - new Date (a.acceptRequestDate).getTime());
       this.totalToday = it.filter(i => !i.cancelDate).map(i => i.totalPrice).reduce((a, b) => a + b);
     })
   }
