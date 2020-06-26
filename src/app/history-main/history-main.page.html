@@ -45,7 +45,7 @@
           <ion-label [color]="order.cancelDate ? 'tertiary' : ''">
             <h2><b>x{{ product.quantity }} {{ product.name}} </b></h2>
             <ion-text color="danger">
-              <p *ngIf="product.option"> {{ product.option}} </p>
+              <p *ngIf="product.option" class="ion-text-wrap"> {{ product.option}} </p>
               <p *ngIf="!product.option">&nbsp;</p>
             </ion-text>
           </ion-label>
