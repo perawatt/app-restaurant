@@ -37,7 +37,7 @@ export class BikerDetailPage implements OnInit {
     });
     this.order$ = this.restaurantSvc.getOrderInfo(this.orderId);
     this.order$.then((it: any) => {
-      this.phoneNo = it.biker.tel;
+      this.phoneNo = it.biker.phoneNumber;
     }, async error => {
       alert.message = error.error.message;
       await alert.present();
