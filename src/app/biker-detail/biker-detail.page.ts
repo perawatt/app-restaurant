@@ -45,7 +45,9 @@ export class BikerDetailPage implements OnInit {
   }
 
   calling() {
-    this.nativeSvc.PhoneCall(this.phoneNo);
+    if (this.phoneNo != null) {
+      this.nativeSvc.PhoneCall(this.phoneNo);
+    }
   }
 
 }
