@@ -34,7 +34,7 @@ export class ContractDetailPage implements OnInit {
       }],
       backdropDismiss: false
     });
-    this.data$ = this.restaurantSvc.getDeliveryServiceById(this.deliveryId);
+    this.data$ = this.restaurantSvc.getDeliveryServiceById(this.deliveryId);    
     this.data$.then((it: any) => {
       this.deliveryName = it.name;
       this.nativeSvc.SetPageTitle(this.deliveryName);
