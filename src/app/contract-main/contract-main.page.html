@@ -7,11 +7,16 @@
           <img [src]="delivery.logoImage != null ? delivery.logoImage:'assets/imgs/dfbiker.png'">
         </ion-avatar>
         <ion-label>
-          <h1><b>{{delivery.name}}Fast delivery</b></h1>
+          <h1><b>{{delivery.name}}</b></h1>
           <ion-label *ngIf="delivery.acceptContractDate" color="success">
             <h3>
               <ion-icon name="checkmark-circle"></ion-icon>
               คุณได้เข้าร่วมแล้ว
+            </h3>
+          </ion-label>
+          <ion-label *ngIf="delivery.acceptContractDate == null" color="success">
+            <h3>
+              &nbsp;
             </h3>
           </ion-label>
         </ion-label>

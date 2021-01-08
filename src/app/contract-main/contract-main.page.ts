@@ -31,7 +31,7 @@ export class ContractMainPage implements OnInit {
       backdropDismiss: false
     });
     this.data$ = this.restaurantSvc.getDeliveryService();
-    this.data$.then(it => {
+    this.data$.then(it => { 
     }, async error => {
       alert.message = error.error.message;
       await alert.present();

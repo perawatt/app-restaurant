@@ -43,10 +43,9 @@ export class OrderMainPage implements OnInit {
   }
 
   getOrderList() {
-    this.data$ = this.restaurantSvc.getOrderList();
+    this.data$ = this.restaurantSvc.getOrderList(); 
   }
 
- //todo รอ Noti แจ้งอนุมัติคำขอยกเลิก
   async presentModal() {
     const modal = await this.modalController.create({
       component: OrderCancelApproveModalsPage,
