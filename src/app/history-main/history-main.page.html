@@ -37,7 +37,7 @@
             <p>{{ order.createDate | date:'M/d/y (H.mm)' }}</p>
           </ion-label>
           <ion-note slot="end" class="ion-text-end">
-            <ion-text [color]="order.cancelDate ? 'tertiary' : 'dark'"><b>ราคารวม ฿{{ order.totalPrice | number }}</b>
+            <ion-text [color]="order.cancelDate ? 'tertiary' : 'dark'"><b>ราคารวม {{ order.totalPrice | number }} THB</b>
             </ion-text>
           </ion-note>
         </ion-item>
@@ -51,7 +51,7 @@
           </ion-label>
           <ion-note slot="end" class="ion-text-end">
             <ion-label [color]="order.cancelDate ? 'tertiary' : 'dark'">
-              <h2><b>฿{{ product.quantity * product.price | number }} </b></h2>
+              <h2><b>{{ product.quantity * product.price | number }} THB </b></h2>
               <ion-text [color]="order.cancelDate ? 'tertiary' : 'dark'">
                 <p><b>&nbsp;</b></p>
               </ion-text>

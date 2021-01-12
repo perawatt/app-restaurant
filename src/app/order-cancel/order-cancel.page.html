@@ -12,7 +12,7 @@
             <p>{{ data.createDate | date:'H:mm' }}</p>
           </ion-label>
           <ion-note slot="end" class="ion-text-end">
-            <ion-text color="dark"><b>ราคารวม ฿{{ data.totalPrice | number }} </b></ion-text>
+            <ion-text color="dark"><b>ราคารวม {{ data.totalPrice | number }} THB</b></ion-text>
           </ion-note>
         </ion-item>
         <ion-item color="light" *ngFor="let product of data.productList">
@@ -25,7 +25,7 @@
           </ion-label>
           <ion-note slot="end" class="ion-text-end">
             <ion-label color="dark">
-              <h2><b>฿{{ product.quantity * product.price | number }} </b></h2>
+              <h2><b>{{ product.quantity * product.price | number }} THB</b></h2>
               <ion-text color="dark">
                 <!-- <p><b>ยกเลิก</b></p> เอาออกไปก่อนตอนนี้ (8 Jan 21) ยังไม่ต้องทำ -->
                 <p><b>&nbsp;</b></p>
