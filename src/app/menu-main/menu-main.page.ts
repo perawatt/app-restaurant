@@ -69,7 +69,8 @@ export class MenuMainPage implements OnInit {
             this.nativeSvc.NavigateToPage("menu-category-edit");
           }
         },
-        { text: 'สแกนเพิ่มเมนู' }
+        // { text: 'สแกนเพิ่มเมนู' },
+        { text: 'ยกเลิก' },
       ]
     });
     await actionSheet.present();
