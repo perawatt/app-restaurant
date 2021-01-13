@@ -110,6 +110,13 @@ export class NativeService {
         }
     }
 
+    public async PlayNotiAudio() {
+        if (environment.production) {
+            await this.retry(() => this.WaitForNativeAppReady());
+            this.callAppMethod("PlayNotiAudio", "");
+        }
+    }
+
     public async UpdateSidemenuItem(title: string, page: string, params?: object) {
         if (environment.production) {
             await this.retry(() => this.WaitForNativeAppReady());
