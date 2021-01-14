@@ -44,6 +44,7 @@ export class OrderMainPage implements OnInit {
 
   getOrderList() {
     this.data$ = this.restaurantSvc.getOrderList(); 
+    this.nativeSvc.PlayNotiAudio();
   }
 
   async presentModal() {
