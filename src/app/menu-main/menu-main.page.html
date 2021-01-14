@@ -34,20 +34,23 @@
             <img [src]="menu.previewImageUrl != null ? menu.previewImageUrl :'assets/imgs/dfmenu.png'">
           </ion-thumbnail>
           <ion-text>
+            <br>
             <ion-label color="dark">
               <h2><b>{{menu.name}}</b></h2>
               <h3><b>{{menu.price | number}} THB</b></h3>
             </ion-label>
-            <ion-label color="danger">
-              <p></p>
-            </ion-label>
+            <br>
           </ion-text>
-          <ion-note slot="end">
+          <ion-note slot="end" class="ion-no-margin">
+            <br>
             <ion-label color="dark">
               <h2>
-                <ion-icon name="pencil-outline" (click)="openPopover($event,menu._id)"></ion-icon>
+                <ion-icon class="ion-padding-start padding-start" name="pencil-outline" (click)="openPopover($event,menu._id)"></ion-icon>
               </h2>
             </ion-label>
+            <br>
+            <ion-toggle class="ion-no-padding">
+            </ion-toggle>
           </ion-note>
         </ion-item>
       </ion-list>
