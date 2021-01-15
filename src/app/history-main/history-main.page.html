@@ -4,28 +4,30 @@
       <ion-label>
         <h2>
           <b>
-            รายได้วันนี้ {{ date | date:'d/M/yyy' }}
+            รายได้วันที่ {{ date | date:'d/M/yyy' }}
           </b>
         </h2>
       </ion-label>
       <ion-note color="light" slot="end" class="ion-text-end">
         <b>
-          {{ totalToday }} บาท
+          {{ totalToday }} THB
         </b>
       </ion-note>
     </ion-item>
-    <ion-item color="dark" lines="none" class="ion-text-center">
-      <ion-label>
-        <h3>
-          <img src="assets/imgs/cash.png" height="10" alt="">
-          ดูรายได้วันอื่นๆ
-        </h3>
+
+    <ion-item color="dark" lines="none" (click)="datePicker.open()">
+      <ion-label color="light" class="ion-text-center">
+        <img src="assets/imgs/cash.png" height="10" alt="">ดูรายได้วันอื่นๆ
+        <ion-datetime #datePicker hidden display-format="DD-MMMM-YYYY" [(ngModel)]="date" min="2021" max={{maxDate}}
+          (ionChange)="getOrderHistories()">
+        </ion-datetime>
       </ion-label>
     </ion-item>
   </ion-card>
 
+
   <ng-container *ngIf="data$ | async as data">
-    <ion-card color="light" *ngFor="let order of data">
+    <ion-card color="light" *ngFor="let order of data.orders">
       <ion-list lines="inset">
         <ion-item lines="none" color="light">
           <ion-label [color]="order.cancelDate ? 'tertiary' : ''" class="ion-text-wrap">
@@ -37,7 +39,8 @@
             <p>{{ order.createDate | date:'M/d/y (H.mm)' }}</p>
           </ion-label>
           <ion-note slot="end" class="ion-text-end">
-            <ion-text [color]="order.cancelDate ? 'tertiary' : 'dark'"><b>ราคารวม {{ order.totalPrice | number }} THB</b>
+            <ion-text [color]="order.cancelDate ? 'tertiary' : 'dark'"><b>ราคารวม {{ order.totalPrice | number }}
+                THB</b>
             </ion-text>
           </ion-note>
         </ion-item>
@@ -71,7 +74,7 @@
       </ion-list>
     </ion-card>
 
-    <ion-card color="light" class="ion-text-center" *ngIf="data.length == 0">
+    <ion-card color="light" class="ion-text-center" *ngIf="data.orders?.length == 0">
       <br><br><br><br><br>
       <ion-text class="ion-text-center" color="dark">
         <h5><b>ไม่มีรายการ</b></h5>
