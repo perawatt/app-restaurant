@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NativeService } from '../../providers/NativeService';
 import { RestaurantService } from '../../services/restaurant.service';
 
@@ -9,10 +9,13 @@ import { RestaurantService } from '../../services/restaurant.service';
 })
 export class HistoryMainPage implements OnInit {
 
-  public date: Date = new Date();
+  @ViewChild('datePicker') datePicker;
   public data$ = Promise.resolve([]);
+  public date: any;
+  public maxDate: string;
   public totalToday: number = 0;
-  constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService) { }
+  constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService) {
+  }
 
   ionViewDidEnter() {
     this.getOrderHistories()
@@ -24,10 +27,15 @@ export class HistoryMainPage implements OnInit {
   }
 
   getOrderHistories() {
-    this.data$ = this.restaurantSvc.getOrderHistories(this.date);
-    this.data$.then(it => {
-      it.sort((a, b) => new Date (b.acceptRequestDate).getTime() - new Date (a.acceptRequestDate).getTime());
-      this.totalToday = it.filter(i => !i.cancelDate).map(i => i.totalPrice).reduce((a, b) => a + b);
+    this.maxDate = new Date(Date.now()).toISOString().substring(0, 10);
+    let doneDate = this.date ? new Date(this.date) : new Date(Date.now());
+    doneDate.setHours(7);
+    this.data$ = this.restaurantSvc.getOrderHistories(doneDate);
+    this.data$.then((it: any) => {
+      this.totalToday = it.total;
+      if (it.orders?.length > 0) {
+        it.orders.sort((a, b) => new Date(b.acceptRequestDate).getTime() - new Date(a.acceptRequestDate).getTime());
+      }
     })
   }
 
