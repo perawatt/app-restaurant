@@ -46,7 +46,7 @@ export class OrderMainPage implements OnInit {
   }
 
   orderDone(orderId: string) {
-    // this.restaurantSvc.hideOrder(orderId);
+    this.restaurantSvc.hideOrder(orderId);
     let order = this.item.find(it => it._id == orderId);
     order.show = false;
     this.noList = this.item.every(x => x.show == false);
