@@ -164,6 +164,12 @@ export class RestaurantService implements IRestaurantService {
     return this.http.get(apiUrl).toPromise();
   }
 
+  async hideOrder(orderId: string): Promise<any> {
+    var restaurantId = await this.svc.GetRestaurantId();
+    let apiUrl = this.baseUrl + "HideOrder/" + restaurantId + '/' + orderId;
+    return this.http.put(apiUrl, {}).toPromise();
+  }
+
   private baseUrl: string = API_URL;
   constructor(private http: HttpClient, private svc: NativeService) { }
 }

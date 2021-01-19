@@ -51,4 +51,6 @@ export interface IRestaurantService {
     updateCategory(categoryId: string, data: any): Promise<any>;
 
     deleteCategory(categoryId: string): Promise<any>;
+
+    hideOrder(orderId: string): Promise<any>;
 }

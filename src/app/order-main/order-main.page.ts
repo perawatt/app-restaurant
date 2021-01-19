@@ -12,11 +12,12 @@ import { OrderCancelApproveModalsPage } from 'src/modals/order-cancel-approve-mo
 export class OrderMainPage implements OnInit {
 
   public data$ = Promise.resolve([]);
+  public item: any[];
   constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService, private modalController: ModalController) { }
 
   ionViewWillEnter() {
     this.getOrderList()
-    this.notificationhandler({"Status":"Shipping"});
+    this.notificationhandler({ "Status": "Shipping" });
   }
 
   ngOnInit() {
@@ -26,13 +27,13 @@ export class OrderMainPage implements OnInit {
   }
 
   notificationhandler(notiParam: any) {
-    switch(notiParam.Status) {
-      case "AcceptRequest" :this.getOrderList(); break;
+    switch (notiParam.Status) {
+      case "AcceptRequest": this.getOrderList(); break;
       case "Shipping": this.getOrderList(); break;
       //TODO: Add popup when cancel confirm or deny
       case "CancelConfirm": this.getOrderList(); break;
       case "CancelDeny": this.getOrderList(); break;
-      default : break;
+      default: break;
     }
     this.nativeSvc.RegisterNotificationHander("SendOrder", (param) => this.getOrderList());
     this.nativeSvc.RegisterRefreshOnGoBack(() => this.getOrderList());
@@ -42,9 +43,21 @@ export class OrderMainPage implements OnInit {
     this.nativeSvc.NavigateToPage("order-cancel", { orderId: _orderId });
   }
 
+  orderDone(orderId: string) {
+    this.restaurantSvc.hideOrder(orderId);
+    let s = this.item.find(it => it._id == orderId);
+    s.show = false;
+  }
+
   getOrderList() {
-    this.data$ = this.restaurantSvc.getOrderList(); 
-    this.nativeSvc.PlayNotiAudio();
+    this.data$ = this.restaurantSvc.getOrderList();
+    this.data$.then((it) => {
+      it.forEach(element => {
+        element.show = true;
+      });
+      this.item = it;
+      this.nativeSvc.PlayNotiAudio();
+    });
   }
 
   async presentModal() {
