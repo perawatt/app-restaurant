@@ -38,6 +38,7 @@ export class MenuMainPage implements OnInit {
     });
     this.data$ = this.restaurantSvc.getRestaurantMenu();
     this.data$.then(it => {
+      console.log(it);     
       let qry = it.filter(i => i.products.length > 0);
       this.category = qry[0].categoryId;
       this.segmentChanged(qry[0].categoryId);

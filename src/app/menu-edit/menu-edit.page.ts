@@ -43,6 +43,7 @@ export class MenuEditPage implements OnInit {
 
   async getData() {
     this.restaurantSvc.getProduct(this.productId).then((it: any) => {
+      console.log(it);
       this.fg.patchValue(it);
     }, async error => {
       this.alert.message = error.error.message;
@@ -65,6 +66,8 @@ export class MenuEditPage implements OnInit {
 
     this.catagory$ = this.restaurantSvc.getCategoryList();
     this.catagory$.then((it: any) => {
+      console.log(it);
+
       this.catagory = it;
     }, async error => {
       this.alert.message = error.error.message;
@@ -89,7 +92,7 @@ export class MenuEditPage implements OnInit {
 
   getPhoto(): string {
     let urlImage = this.fg.get('previewImageId').value != null ? this.fg.get('previewImageId').value : 'assets/imgs/dfmenu.png';
-    return "https://manamockapi.azurewebsites.net/Image/" + urlImage;
+    return urlImage;
   }
 
   async submit() {
@@ -99,7 +102,7 @@ export class MenuEditPage implements OnInit {
       if (this.file == null) {
         this.restaurantSvc.updateProduct(this.productId, formData).then(_ => {
           this.nativeSvc.GoBack();
-        });
+        });        
       }
       else {
         const loading = await this.loadingCtr.create({
@@ -111,7 +114,7 @@ export class MenuEditPage implements OnInit {
           buttons: ['OK']
         });
         await loading.present();
-        this.restaurantSvc.getSasManaUpload(formData.previewImageId).then(it => {
+        this.restaurantSvc.getSasManaUpload().then(it => {
           this.sas = it;
           this.uploadProgress$ = from(this.file as FileList).pipe(
             map(file => this.uploadFileSvc.uploadFile(file, this.sas)),
