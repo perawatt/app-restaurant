@@ -13,9 +13,11 @@ export class OrderMainPage implements OnInit {
 
   public data$ = Promise.resolve([]);
   public item: any[];
+  public noList: any;
   constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService, private modalController: ModalController) { }
 
   ionViewWillEnter() {
+    this.noList = true;
     this.getOrderList()
     this.notificationhandler({ "Status": "Shipping" });
   }
@@ -44,9 +46,10 @@ export class OrderMainPage implements OnInit {
   }
 
   orderDone(orderId: string) {
-    this.restaurantSvc.hideOrder(orderId);
-    let s = this.item.find(it => it._id == orderId);
-    s.show = false;
+    // this.restaurantSvc.hideOrder(orderId);
+    let order = this.item.find(it => it._id == orderId);
+    order.show = false;
+    this.noList = this.item.every(x => x.show == false);
   }
 
   getOrderList() {
@@ -56,6 +59,9 @@ export class OrderMainPage implements OnInit {
         element.show = true;
       });
       this.item = it;
+      if (this.item.length != 0) {
+        this.noList = false;
+      }
       this.nativeSvc.PlayNotiAudio();
     });
   }

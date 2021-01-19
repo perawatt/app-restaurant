@@ -11,7 +11,7 @@ export class HistoryMainPage implements OnInit {
 
   @ViewChild('datePicker') datePicker;
   public data$ = Promise.resolve([]);
-  public date: any;
+  public date = Date.now();
   public maxDate: string;
   public totalToday: number = 0;
   constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService) {
