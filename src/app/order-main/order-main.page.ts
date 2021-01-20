@@ -12,7 +12,7 @@ import { OrderCancelApproveModalsPage } from 'src/modals/order-cancel-approve-mo
 export class OrderMainPage implements OnInit {
 
   public data$ = Promise.resolve([]);
-  public item: any[];
+  public order: any[];
   public noList: any;
   constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService, private modalController: ModalController) { }
 
@@ -47,9 +47,9 @@ export class OrderMainPage implements OnInit {
 
   orderDone(orderId: string) {
     this.restaurantSvc.hideOrder(orderId);
-    let order = this.item.find(it => it._id == orderId);
+    let order = this.order.find(it => it._id == orderId);
     order.show = false;
-    this.noList = this.item.every(x => x.show == false);
+    this.noList = this.order.every(x => x.show == false);
   }
 
   getOrderList() {
@@ -58,11 +58,11 @@ export class OrderMainPage implements OnInit {
       it.forEach(element => {
         element.show = true;
       });
-      this.item = it;
-      if (this.item.length != 0) {
+      this.order = it;
+      if (this.order.length != 0) {
         this.noList = false;
+        this.nativeSvc.PlayNotiAudio();
       }
-      this.nativeSvc.PlayNotiAudio();
     });
   }
 
