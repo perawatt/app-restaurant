@@ -11,13 +11,14 @@ export class HistoryMainPage implements OnInit {
 
   @ViewChild('datePicker') datePicker;
   public data$ = Promise.resolve([]);
-  public date = Date.now();
+  public date : Date;
   public maxDate: string;
   public totalToday: number = 0;
   constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService) {
   }
 
   ionViewDidEnter() {
+    this.date = new Date();
     this.getOrderHistories()
   }
 
