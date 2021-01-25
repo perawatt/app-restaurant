@@ -14,6 +14,7 @@ export class OrderMainPage implements OnInit {
   public data$ = Promise.resolve([]);
   public order: any[];
   public noList: any;
+  public loadingEvent: any;
   constructor(private nativeSvc: NativeService, private restaurantSvc: RestaurantService, private modalController: ModalController) { }
 
   ionViewWillEnter() {
@@ -62,7 +63,10 @@ export class OrderMainPage implements OnInit {
       if (this.order.length != 0) {
         this.noList = false;
         this.nativeSvc.PlayNotiAudio();
-      }
+      };     
+      if (this.loadingEvent) {       
+        this.loadingEvent.target.complete();
+      }     
     });
   }
 
@@ -78,4 +82,9 @@ export class OrderMainPage implements OnInit {
     this.nativeSvc.NavigateToPage("biker-detail", { orderId: orderId });
   }
 
+  doRefresh(event) {
+    this.loadingEvent = event;
+    this.getOrderList();
+
+  }
 }

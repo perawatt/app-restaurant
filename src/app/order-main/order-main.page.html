@@ -1,4 +1,11 @@
 <ion-content mode="ios">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-down-outline" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ng-container *ngIf="data$ | async as data">
     <ion-card color="light" *ngFor="let order of data">
       <ion-list *ngIf="order.show" lines="inset">
